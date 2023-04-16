@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { ModelDaftarPenhajuan } from "@/view/after_login/admin/daftar_pengajuan/model/ModelDaftarPenhajuan";
-import { DaftarPengajuanRepository } from "@/repository/admin/daftar_pengajuan_repository/DaftarPengajuanRepository";
 import {
     DatumResponsePengajuanEntity
 } from "@/repository/admin/daftar_pengajuan_repository/entity/ResponsePengajuanEntity";
 import { EnumStatus } from "@/utils/enum/status/EnumStatus";
 import FormatDate from "@/utils/utils/format_date/FormatDate";
 import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
-import { ModelSelectOption } from "@/application/component/input/model/ModelSelectOption";
-import { RepositoryAddPengajuan } from "@/repository/user/add_pengajuan/RepositoryAddPengajuan";
+import {
+    DaftarPengajuanAtasanRepository
+} from "@/repository/atasan/daftar_pengajuan_repository/DaftarPengajuanAtasanRepository";
 
 
-export const DaftarPengajuanViewModel = () => {
+export const DaftarPengajuanAtasanViewModel = () => {
 
     const [ loading, setLoading ] = useState( false );
 
@@ -21,27 +21,9 @@ export const DaftarPengajuanViewModel = () => {
 
     const [ searchPengajuan, setSearchPengajuan ] = useState<ModelDaftarPenhajuan[]>( [] );
 
-    const listPrioritas : ModelSelectOption[] = [
-        {
-            key : '1',
-            value : 'Low',
-            title : 'Low',
-        },
-        {
-            key : '2',
-            value : 'Normal',
-            title : 'Normal',
-        },
-        {
-            key : '3',
-            value : 'High',
-            title : 'High',
-        },
-    ]
-
     const getListPengajuan = async () => {
         setLoading( true );
-        const response = await DaftarPengajuanRepository()
+        const response = await DaftarPengajuanAtasanRepository()
         if ( response !== null ) {
             const dataList : ModelDaftarPenhajuan[] = response.data.map( ( item : DatumResponsePengajuanEntity ) => {
                 const status = item.status ?? '';
@@ -67,7 +49,6 @@ export const DaftarPengajuanViewModel = () => {
         setSearchPengajuan( data );
     }
 
-
     useEffect( () => {
         getListPengajuan();
         return () => {
@@ -81,6 +62,5 @@ export const DaftarPengajuanViewModel = () => {
         searchPengajuan,
         searchDataPengajuan,
         search, setSearch,
-        listPrioritas
     }
 }

@@ -1,15 +1,13 @@
 "use client";
 import { TableDaftarPengajaun } from "@/view/after_login/admin/daftar_pengajuan/component/TableDaftarPengajaun";
-import {
-    DaftarPengajuanViewModel
-} from "@/view/after_login/admin/daftar_pengajuan/view_model/DaftarPengajuanViewModel";
 import { FaAngleDoubleDown } from "react-icons/fa";
-import React, { useContext } from "react";
-import { ModalContext } from "@/application/component/modal/ModalContext";
+import React from "react";
+import {
+    DaftarPengajuanAtasanViewModel
+} from "@/view/after_login/atasan/daftar_pengajuan/view_model/DaftarPengajuanAtasanViewModel";
 
 
-export const DaftarPengajuanView = () => {
-    const modal = useContext( ModalContext );
+export const DaftarPengajuanAtasanView = () => {
     const {
         listPengajuan,
         loading,
@@ -17,7 +15,7 @@ export const DaftarPengajuanView = () => {
         searchDataPengajuan,
         search,
         setSearch,
-    } = DaftarPengajuanViewModel();
+    } = DaftarPengajuanAtasanViewModel();
 
 
     return <section className = "content">
@@ -66,4 +64,5 @@ export const DaftarPengajuanView = () => {
             </div>
         </div>
     </section>
+
 }

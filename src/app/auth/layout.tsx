@@ -34,7 +34,9 @@ export default function AuthLayout( {
               } }>
         <ModalData>
             <ToastContainer
-                autoClose = { false }
+                position = "top-right"
+                autoClose = { 5000 }
+                hideProgressBar = { false }
                 closeOnClick = { true }/>
             <ToastData>
                 { children }

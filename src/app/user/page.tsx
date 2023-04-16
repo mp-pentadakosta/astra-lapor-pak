@@ -1,11 +1,11 @@
-import { DashboardView } from "@/view/after_login/admin/dashboard/view/DashboardView";
+import { DashboardUserView } from "@/view/after_login/user/dashboard/view/DashboardUserView";
 
 
 export default function DashboardUser() {
     return <div className = "content-wrapper">
         <div className = "container-full">
 
-            <DashboardView/>
+            <DashboardUserView/>
 
         </div>
     </div>

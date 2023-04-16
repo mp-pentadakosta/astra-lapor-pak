@@ -1,11 +1,11 @@
-import { HistoryPengajuanView } from "@/view/after_login/admin/history/view/HistoryPengajuanView";
+import { HistoryPengajuanAtasanView } from "@/view/after_login/atasan/history/view/HistoryPengajuanAtasanView";
 
 
 export default function History() {
     return <div className = "content-wrapper">
         <div className = "container-full">
 
-            <HistoryPengajuanView/>
+            <HistoryPengajuanAtasanView/>
 
         </div>
     </div>
