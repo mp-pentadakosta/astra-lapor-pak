@@ -8,7 +8,9 @@ export const RepositoryAddPengajuan = async ( data : ModelAddPengajuan ) => {
         "deskripsi" : data.deskripsi,
         "prioritas" : data.prioritas,
         "foto" : data.foto.map( ( item : string ) => {
-            return item
+            return {
+                "image" : item
+            }
         } ),
     } )
     return null;

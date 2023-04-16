@@ -56,6 +56,7 @@ class Api {
             }
             if ( resp.status === 201 ) {
                 HandlerResponse.success( 'Success add data' )
+                return JSON.stringify( resp.data );
             }
             return null;
         } catch ( e ) {
@@ -91,6 +92,10 @@ class Api {
             }
             else if ( error.response?.status === 500 ) {
                 HandlerResponse.internalError( "Internal Server Error" )
+                return null;
+            }
+            else if ( error.response?.status === 504 ) {
+                HandlerResponse.internalError( "Server Error" )
                 return null;
             }
             else if ( error.response?.status === 501 || error.response?.status === 502 || error.response?.status === 503 ) {

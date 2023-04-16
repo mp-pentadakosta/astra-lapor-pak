@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import Image from "next/image";
+import { FaCheck, FaInfo } from "react-icons/fa";
 
 
 export const ErrorResponse = ( data : string ) => {
@@ -10,11 +10,23 @@ export const ErrorResponse = ( data : string ) => {
         },
         icon : () => {
             return <div>
-                <Image src = { '/img/img/caution.png' }
-                       alt = { 'error' }
-                       width = { 20 }
-                       height = { 20 }
-                       color = { 'white' }/>
+                <FaInfo/>
+            </div>
+        },
+        closeButton : true,
+        theme : "light",
+    } )
+}
+
+export const ErrorSuccess = ( data : string ) => {
+    toast.error( data, {
+        style : {
+            background : "#4caf50",
+            color : "#ffffff",
+        },
+        icon : () => {
+            return <div>
+                <FaCheck/>
             </div>
         },
         closeButton : true,

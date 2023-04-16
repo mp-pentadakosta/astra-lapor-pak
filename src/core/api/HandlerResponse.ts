@@ -1,9 +1,9 @@
-import { ErrorResponse } from "@/core/api/ErrorResponse";
+import { ErrorResponse, ErrorSuccess } from "@/core/api/ErrorResponse";
 
 
 class HandlerResponse {
     public success( data : any ) {
-        ErrorResponse( 'Success Tambah Data' )
+        ErrorSuccess( 'Success Tambah Data' )
     }
 
     public badRequest( data : any ) {
