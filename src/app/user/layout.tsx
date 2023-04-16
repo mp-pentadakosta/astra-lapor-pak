@@ -11,6 +11,7 @@ import { HeaderLayout } from "@/application/layout/header/HeaderLayout";
 import { SideBarLayout } from "@/application/layout/sidebar/SideBarLayout";
 import { ModalData } from "@/application/component/modal/ModalContext";
 import { ToastData } from "@/application/component/alert/ToastData";
+import React from "react";
 
 
 export default function RootLayout( {
@@ -31,11 +32,15 @@ export default function RootLayout( {
         </Head>
         <body className = "hold-transition light-skin sidebar-mini theme-primary fixed">
 
-        <div className = "wrapper">
-            <HeaderLayout/>
-            <SideBarLayout/>
-            { children }
-        </div>
+        <ModalData>
+            <ToastData>
+                <div className = "wrapper">
+                    <HeaderLayout/>
+                    <SideBarLayout/>
+                    { children }
+                </div>
+            </ToastData>
+        </ModalData>
 
 
         </body>

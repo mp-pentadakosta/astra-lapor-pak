@@ -22,7 +22,7 @@ export const InputSelectOption = ( props : Interface ) => {
                     return <option key = { index }
                                    value = { item.value }
                                    selected = { item.selected }>
-                        { item.key }
+                        { item.title }
                     </option>
                 } )
             }

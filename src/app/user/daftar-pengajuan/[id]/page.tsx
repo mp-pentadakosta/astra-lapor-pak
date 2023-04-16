@@ -1,11 +1,11 @@
-import { DetailPengajuanView } from "@/view/after_login/admin/detail_pengajuan/view/DetailPengajuanView";
+import { DaftarPengajuanView } from "@/view/after_login/admin/daftar_pengajuan/view/DaftarPengajuanView";
 
 
 export default function DetailPengajuan() {
     return <div className = "content-wrapper">
         <div className = "container-full">
 
-            <DetailPengajuanView/>
+            detail pengajuan
 
         </div>
     </div>

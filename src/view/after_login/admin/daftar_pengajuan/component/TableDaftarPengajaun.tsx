@@ -89,7 +89,7 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
                 marginTop : "20px",
                 marginBlock : "20px",
             } }>
-                Tutunggu sebentar...
+                Tunggu sebentar...
             </div> : (
                 props.listPengajuan.length === 0 ? <div style = { {
                     display : "flex",

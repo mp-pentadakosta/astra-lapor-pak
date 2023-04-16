@@ -7,6 +7,8 @@ import {
 import { EnumStatus } from "@/utils/enum/status/EnumStatus";
 import FormatDate from "@/utils/utils/format_date/FormatDate";
 import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
+import { ModelAddPengajuan } from "@/view/after_login/admin/daftar_pengajuan/model/ModelAddPengajuan";
+import { ModelSelectOption } from "@/application/component/input/model/ModelSelectOption";
 
 
 export const DaftarPengajuanViewModel = () => {
@@ -18,6 +20,26 @@ export const DaftarPengajuanViewModel = () => {
     const [ listPengajuan, setListPengajuan ] = useState<ModelDaftarPenhajuan[]>( [] );
 
     const [ searchPengajuan, setSearchPengajuan ] = useState<ModelDaftarPenhajuan[]>( [] );
+
+    const [ addPengajuan, setAddPengajaun ] = useState<ModelAddPengajuan>();
+
+    const listPrioritas : ModelSelectOption[] = [
+        {
+            key : '1',
+            value : 'Low',
+            title : 'Low',
+        },
+        {
+            key : '2',
+            value : 'Normal',
+            title : 'Normal',
+        },
+        {
+            key : '3',
+            value : 'High',
+            title : 'High',
+        },
+    ]
 
     const getListPengajuan = async () => {
         setLoading( true );
@@ -47,6 +69,11 @@ export const DaftarPengajuanViewModel = () => {
         setSearchPengajuan( data );
     }
 
+    const doAddPengajuan = async () => {
+        const dataToSend = addPengajuan
+        console.log( dataToSend )
+    }
+
     useEffect( () => {
         getListPengajuan();
         return () => {
@@ -59,6 +86,9 @@ export const DaftarPengajuanViewModel = () => {
         loading,
         searchPengajuan,
         searchDataPengajuan,
-        search, setSearch
+        search, setSearch,
+        addPengajuan, setAddPengajaun,
+        doAddPengajuan,
+        listPrioritas
     }
 }
