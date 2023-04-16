@@ -4,8 +4,7 @@ import {
     DaftarPengajuanViewModel
 } from "@/view/after_login/admin/daftar_pengajuan/view_model/DaftarPengajuanViewModel";
 import { FaAngleDoubleDown } from "react-icons/fa";
-import React, { useContext } from "react";
-import { ModalContext } from "@/application/component/modal/ModalContext";
+import React from "react";
 
 
 export const DaftarPengajuanView = () => {
