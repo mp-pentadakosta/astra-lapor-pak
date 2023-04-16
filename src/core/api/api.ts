@@ -62,36 +62,39 @@ class Api {
             const error = e as AxiosError;
 
             if ( error.message === 'Timeout' ) {
-                HandlerResponse.timeout( error.message )
+                HandlerResponse.timeout( "Time Out, Periksa Koneksi Internet" )
                 return null;
             }
 
             if ( error.response?.status === 400 ) {
-                HandlerResponse.badRequest( error.message )
+                // @ts-ignore
+                HandlerResponse.badRequest( error.response.data?.message )
                 return null;
             }
             else if ( error.response?.status === 401 ) {
-                HandlerResponse.unauthorized( error.message )
+                // @ts-ignore
+                HandlerResponse.unauthorized( error.response.data?.message )
                 return null;
             }
             else if ( error.response?.status === 403 ) {
-                HandlerResponse.forbidden( error.message )
+                // @ts-ignore
+                HandlerResponse.forbidden( error.response.data?.message )
                 return null;
             }
             else if ( error.response?.status === 404 ) {
-                HandlerResponse.notFound( error.message )
+                HandlerResponse.notFound( "Data Tidak Ditemukan" )
                 return null;
             }
             else if ( error.response?.status === 405 ) {
-                HandlerResponse.methodNotAllowed( error.message )
+                HandlerResponse.methodNotAllowed( "Tidak Di Izinkan" )
                 return null;
             }
             else if ( error.response?.status === 500 ) {
-                HandlerResponse.internalError( error.message )
+                HandlerResponse.internalError( "Internal Server Error" )
                 return null;
             }
             else if ( error.response?.status === 501 || error.response?.status === 502 || error.response?.status === 503 ) {
-                HandlerResponse.networkError( error.message )
+                HandlerResponse.networkError( "Belum Terdefinisi" )
                 return null;
             }
         } finally {

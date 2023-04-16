@@ -9,7 +9,7 @@ interface InterfaceStatusPrioritas {
 class StatusPrioritas {
     public statusPrioritas = ( props : EnumPrioritas ) : InterfaceStatusPrioritas => {
         return {
-            color : props === EnumPrioritas.high ? "white" : props === EnumPrioritas.medium ? "white" : "black",
+            color : props === EnumPrioritas.high ? "white" : props === EnumPrioritas.medium ? "white" : "white",
             backgroundColor : props === EnumPrioritas.high ? "#db3c30" : props === EnumPrioritas.medium ? "#03a9f4" : "#4caf50"
         }
     }

@@ -12,6 +12,7 @@ import { SideBarLayout } from "@/application/layout/sidebar/SideBarLayout";
 import { ModalData } from "@/application/component/modal/ModalContext";
 import { ToastData } from "@/application/component/alert/ToastData";
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 
 export default function RootLayout( {
@@ -33,6 +34,9 @@ export default function RootLayout( {
         <body className = "hold-transition light-skin sidebar-mini theme-primary fixed">
 
         <ModalData>
+            <ToastContainer
+                autoClose = { false }
+                closeOnClick = { true }/>
             <ToastData>
                 <div className = "wrapper">
                     <HeaderLayout/>

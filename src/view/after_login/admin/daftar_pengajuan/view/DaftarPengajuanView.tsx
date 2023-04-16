@@ -40,7 +40,7 @@ export const DaftarPengajuanView = () => {
                         <div className = "mb-0 card-subtitle text-muted">
                             <button type = "button" className = "btn btn-primary" onClick = { () => {
                                 modal.show();
-                                modal.body( modalDataBody() );
+                                modal.body( modalDataBody( addPengajuan ) );
                             } }>
                                 <FaPlus style = { {
                                     marginRight : '0.5rem'
@@ -77,7 +77,6 @@ export const DaftarPengajuanView = () => {
                                     <FaAngleDoubleDown style = { {
                                         marginRight : "5px"
                                     } }/>
-                                    {/*<i className = "fa fa-spin fa-refresh"></i>&nbsp; */ }
                                     Cari Lagi
                                 </button>
                             </div>
@@ -88,7 +87,8 @@ export const DaftarPengajuanView = () => {
         </div>
     </section>
 
-    function modalDataBody() {
+    function modalDataBody( data : ModelAddPengajuan | undefined ) {
+        let dataToSend = data;
         return <div className = "modal-dialog modal-dialog-centered">
             <div className = "modal-content">
                 <div className = "modal-header">
@@ -100,32 +100,28 @@ export const DaftarPengajuanView = () => {
                             } }></button>
                 </div>
                 <div className = "modal-body">
-                    <TextInputPrimary label = { 'Nama Pengajuan' } type = { 'text' } onChange = { ( event ) => {
-                        setAddPengajaun( ( prevState ) => {
-                            return {
-                                ...prevState,
-                                namaPengajuan : event.target.value
-                            } as ModelAddPengajuan
-                        } )
-                    } }/>
+                    <TextInputPrimary label = { 'Nama Pengajuan' }
+                                      type = { 'text' }
+                                      onChange = { ( event ) => {
+                                          dataToSend = {
+                                              ...dataToSend,
+                                              namaPengajuan : event.target.value
+                                          } as ModelAddPengajuan
+                                      } }/>
                     <InputSelectOption label = { 'Prioritas' }
                                        value = { listPrioritas }
                                        selected = { ( value ) => {
-                                           setAddPengajaun( ( prevState ) => {
-                                               return {
-                                                   ...prevState,
-                                                   prioritas : value?.value
-                                               } as ModelAddPengajuan
-                                           } )
+                                           dataToSend = {
+                                               ...dataToSend,
+                                               prioritas : value?.value
+                                           } as ModelAddPengajuan
                                        } }/>
                     <InputTextArea label = { 'Deskripsi' }
                                    onChange = { ( event ) => {
-                                       setAddPengajaun( ( prevState ) => {
-                                           return {
-                                               ...prevState,
-                                               deskripsi : event.target.value
-                                           } as ModelAddPengajuan
-                                       } )
+                                       dataToSend = {
+                                           ...dataToSend,
+                                           deskripsi : event.target.value
+                                       } as ModelAddPengajuan
                                    } }/>
                     <InputFilePrimary label = { 'Masukan Foto' }
                                       isMultiple = { true }
@@ -136,19 +132,15 @@ export const DaftarPengajuanView = () => {
                                                   const file = files[ i ];
                                                   const reader = new FileReader();
                                                   reader.onload = ( event ) => {
-                                                      // console.log( event.target?.result );
-                                                      // setBase64( [ ...base64, event.target?.result as string ] );
-                                                      setAddPengajaun( ( prevState ) => {
-                                                          return {
-                                                              ...prevState,
-                                                              foto : [ ...prevState?.foto ?? [], event.target?.result as string ]
-                                                          } as ModelAddPengajuan
-                                                      } )
+                                                      dataToSend = {
+                                                          ...dataToSend,
+                                                          foto : [ ...dataToSend?.foto ?? [],
+                                                              event.target?.result as string ]
+                                                      } as ModelAddPengajuan
                                                   };
                                                   reader.readAsDataURL( file );
                                               }
                                           }
-
                                       } }/>
                 </div>
                 <div className = { `modal-footer` }>
@@ -162,7 +154,7 @@ export const DaftarPengajuanView = () => {
                             type = { "btn-danger" }/>
                         <ButtonPrimary
                             onClick = { () => {
-                                console.log( addPengajuan );
+                                doAddPengajuan( dataToSend )
                                 modal.hide();
                             } }
                             label = { 'Simpan' }/>

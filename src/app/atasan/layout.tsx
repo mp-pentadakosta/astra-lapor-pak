@@ -12,6 +12,7 @@ import { SideBarLayout } from "@/application/layout/sidebar/SideBarLayout";
 import { ToastData } from "@/application/component/alert/ToastData";
 import { ModalData } from "@/application/component/modal/ModalContext";
 import React from "react";
+import { ToastContainer } from "react-toastify";
 
 
 export default function RootLayout( {
@@ -34,6 +35,9 @@ export default function RootLayout( {
 
 
         <ModalData>
+            <ToastContainer
+                autoClose = { false }
+                closeOnClick = { true }/>
             <ToastData>
                 <div className = "wrapper">
                     <HeaderLayout/>

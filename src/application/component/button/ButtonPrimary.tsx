@@ -7,6 +7,7 @@ interface InterfaceButtonPrimary {
 export const ButtonPrimary = ( props : InterfaceButtonPrimary ) => {
     return <div className = "clearfix">
         <button type = "button"
+                onClick = { props.onClick }
                 className = { `waves-effect waves-light btn ${ props.type ?? 'btn-primary' } mb-5` }>{ props.label }</button>
     </div>
 }

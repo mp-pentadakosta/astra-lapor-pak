@@ -69,8 +69,7 @@ export const DaftarPengajuanViewModel = () => {
         setSearchPengajuan( data );
     }
 
-    const doAddPengajuan = async () => {
-        const dataToSend = addPengajuan
+    const doAddPengajuan = async ( dataToSend : ModelAddPengajuan | undefined ) => {
         console.log( dataToSend )
     }
 
