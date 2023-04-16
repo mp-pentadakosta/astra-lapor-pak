@@ -16,8 +16,8 @@ import { TableDaftarPengajaunUser } from "@/view/after_login/user/daftar_pengaju
 
 
 export const DaftarPengajuanUserView = () => {
-    const modal = useContext( ModalContext );
     const {
+        modal,
         listPengajuan,
         loading,
         searchPengajuan,
@@ -27,6 +27,9 @@ export const DaftarPengajuanUserView = () => {
         doAddPengajuan,
         addPengajuan,
         listPrioritas,
+        getListPengajuan,
+        page,
+        setPage,
     } = DaftarPengajuanUserViewModel();
 
 
@@ -66,11 +69,16 @@ export const DaftarPengajuanUserView = () => {
                             </div>
                         </div>
                         <TableDaftarPengajaunUser
+                            role = { 'user' }
                             loading = { loading }
                             listPengajuan = { search !== '' ? searchPengajuan : listPengajuan }/>
-                        <div className = "row">
+                        <div className = "row mt-20">
                             <div className = "col-12 text-center">
                                 <button type = "button"
+                                        onClick = { () => {
+                                            setPage( page + 1 );
+                                            getListPengajuan( page, 10 );
+                                        } }
                                         className = "btn btn-info-light ajax"
                                         title = "">
                                     <FaAngleDoubleDown style = { {
@@ -153,8 +161,9 @@ export const DaftarPengajuanUserView = () => {
                             type = { "btn-danger" }/>
                         <ButtonPrimary
                             onClick = { () => {
-                                doAddPengajuan( dataToSend )
-                                modal.hide();
+                                doAddPengajuan( dataToSend ).then( () => {
+                                } );
+
                             } }
                             label = { 'Simpan' }/>
                     </div>

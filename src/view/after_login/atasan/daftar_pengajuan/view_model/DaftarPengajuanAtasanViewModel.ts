@@ -9,6 +9,7 @@ import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
 import {
     DaftarPengajuanAtasanRepository
 } from "@/repository/atasan/daftar_pengajuan_repository/DaftarPengajuanAtasanRepository";
+import StatusFormat from "@/utils/utils/status/StatusFormat";
 
 
 export const DaftarPengajuanAtasanViewModel = () => {
@@ -34,7 +35,7 @@ export const DaftarPengajuanAtasanViewModel = () => {
                     tanggalPengajuan : FormatDate.stringDateToStringLocale( item.tanggal_pengajuan ),
                     departemen : 'Departemen',//item.departemen ?? ''
                     prioritas : item.prioritas === 'High' ? EnumPrioritas.high : item.prioritas === 'Medium' ? EnumPrioritas.medium : EnumPrioritas.low,
-                    status : status === 'Selesai' ? EnumStatus.selesai : status === 'Proses Vendor' ? EnumStatus.dalamProses : EnumStatus.undefined
+                    status : StatusFormat.getStatus( item.status ?? '' ),
                 }
             } );
             setListPengajuan( dataList );

@@ -1,10 +1,10 @@
 "use client";
-import { TableDaftarPengajaun } from "@/view/after_login/admin/daftar_pengajuan/component/TableDaftarPengajaun";
 import {
     DaftarPengajuanViewModel
 } from "@/view/after_login/admin/daftar_pengajuan/view_model/DaftarPengajuanViewModel";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import React from "react";
+import { TableDaftarPengajaunUser } from "@/view/after_login/user/daftar_pengajuan/component/TableDaftarPengajaunUser";
 
 
 export const DaftarPengajuanView = () => {
@@ -15,6 +15,9 @@ export const DaftarPengajuanView = () => {
         searchDataPengajuan,
         search,
         setSearch,
+        setPage,
+        page,
+        getListPengajuan
     } = DaftarPengajuanViewModel();
 
 
@@ -44,12 +47,17 @@ export const DaftarPengajuanView = () => {
                                 </div>
                             </div>
                         </div>
-                        <TableDaftarPengajaun
+                        <TableDaftarPengajaunUser
+                            role = { 'admin' }
                             loading = { loading }
                             listPengajuan = { search !== '' ? searchPengajuan : listPengajuan }/>
                         <div className = "row">
                             <div className = "col-12 text-center">
                                 <button type = "button"
+                                        onClick = { () => {
+                                            setPage( page + 1 );
+                                            getListPengajuan( page, 10 );
+                                        } }
                                         className = "btn btn-info-light ajax"
                                         title = "">
                                     <FaAngleDoubleDown style = { {

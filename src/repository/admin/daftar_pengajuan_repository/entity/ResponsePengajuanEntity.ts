@@ -27,8 +27,15 @@ export interface DatumResponsePengajuanEntity {
     createdAt : Date;
     updatedAt : Date;
     vendor : null;
+    departemen : string;
+    user : UserResponsePengajuanEntity;
     foto : FotoResponsePengajuanEntity[];
     aktivitas : AktivitaResponsePengajuanEntity[];
+}
+
+export interface UserResponsePengajuanEntity {
+    nama : string;
+    departemen : string;
 }
 
 export interface AktivitaResponsePengajuanEntity {

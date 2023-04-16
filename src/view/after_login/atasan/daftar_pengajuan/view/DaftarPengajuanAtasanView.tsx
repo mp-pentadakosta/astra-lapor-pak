@@ -1,10 +1,10 @@
 "use client";
-import { TableDaftarPengajaun } from "@/view/after_login/admin/daftar_pengajuan/component/TableDaftarPengajaun";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import React from "react";
 import {
     DaftarPengajuanAtasanViewModel
 } from "@/view/after_login/atasan/daftar_pengajuan/view_model/DaftarPengajuanAtasanViewModel";
+import { TableDaftarPengajaunUser } from "@/view/after_login/user/daftar_pengajuan/component/TableDaftarPengajaunUser";
 
 
 export const DaftarPengajuanAtasanView = () => {
@@ -44,7 +44,8 @@ export const DaftarPengajuanAtasanView = () => {
                                 </div>
                             </div>
                         </div>
-                        <TableDaftarPengajaun
+                        <TableDaftarPengajaunUser
+                            role = { 'atasan' }
                             loading = { loading }
                             listPengajuan = { search !== '' ? searchPengajuan : listPengajuan }/>
                         <div className = "row">

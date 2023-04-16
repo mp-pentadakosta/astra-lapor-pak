@@ -8,6 +8,11 @@ import { EnumStatus } from "@/utils/enum/status/EnumStatus";
 import FormatDate from "@/utils/utils/format_date/FormatDate";
 import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
 import { ModelSelectOption } from "@/application/component/input/model/ModelSelectOption";
+import StatusFormat from "@/utils/utils/status/StatusFormat";
+import {
+    DaftarPengajuanUserRepository
+} from "@/repository/user/daftar_pengajuan_repository/DaftarPengajuanUserRepository";
+import { ModelDaftarPengajuanUser } from "@/view/after_login/user/daftar_pengajuan/model/ModelDaftarPengajuanUser";
 
 
 export const DaftarPengajuanViewModel = () => {
@@ -37,24 +42,26 @@ export const DaftarPengajuanViewModel = () => {
             title : 'High',
         },
     ]
-
-    const getListPengajuan = async () => {
+    const [ page, setPage ] = useState( 1 );
+    const getListPengajuan = async ( page : number, limit : number ) => {
         setLoading( true );
-        const response = await DaftarPengajuanRepository()
+        const response = await DaftarPengajuanRepository( page, limit )
         if ( response !== null ) {
-            const dataList : ModelDaftarPenhajuan[] = response.data.map( ( item : DatumResponsePengajuanEntity ) => {
-                const status = item.status ?? '';
+            const dataList : ModelDaftarPengajuanUser[] = response.data.map( ( item : DatumResponsePengajuanEntity ) => {
                 return {
                     id : item.id,//item.id ?? 0,
                     namaBarang : item.pengajuan_name ?? '',
-                    namaPemohon : item.pengajuan_name,//item.vendor ?? '',
+                    namaPemohon : item.user.nama,//item.vendor ?? '',
                     tanggalPengajuan : FormatDate.stringDateToStringLocale( item.tanggal_pengajuan ),
-                    departemen : 'Departemen',//item.departemen ?? ''
+                    departemen : item.user.departemen,//item.departemen ?? ''
                     prioritas : item.prioritas === 'High' ? EnumPrioritas.high : item.prioritas === 'Medium' ? EnumPrioritas.medium : EnumPrioritas.low,
-                    status : status === 'Selesai' ? EnumStatus.selesai : status === 'Proses Vendor' ? EnumStatus.dalamProses : EnumStatus.undefined
+                    status : StatusFormat.getStatus( item.status ?? '' ),
                 }
             } );
-            setListPengajuan( dataList );
+            setListPengajuan( ( prevState ) => [
+                ...prevState,
+                ...dataList
+            ] );
         }
         setLoading( false );
     }
@@ -68,7 +75,7 @@ export const DaftarPengajuanViewModel = () => {
 
 
     useEffect( () => {
-        getListPengajuan();
+        getListPengajuan( 0, 10 );
         return () => {
         };
     }, [] );
@@ -80,6 +87,8 @@ export const DaftarPengajuanViewModel = () => {
         searchPengajuan,
         searchDataPengajuan,
         search, setSearch,
-        listPrioritas
+        listPrioritas,
+        page, setPage,
+        getListPengajuan,
     }
 }

@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { FaCheck, FaInfo } from "react-icons/fa";
+import React from "react";
 
 
 export const ErrorResponse = ( data : string ) => {
@@ -8,28 +9,20 @@ export const ErrorResponse = ( data : string ) => {
             background : "#f44336",
             color : "#ffffff",
         },
-        icon : () => {
-            return <div>
-                <FaInfo/>
-            </div>
-        },
+        icon : <FaInfo/>,
         closeButton : true,
-        theme : "light",
+        hideProgressBar : true,
     } )
 }
 
 export const ErrorSuccess = ( data : string ) => {
-    toast.error( data, {
+    toast.success( data, {
         style : {
             background : "#4caf50",
             color : "#ffffff",
         },
-        icon : () => {
-            return <div>
-                <FaCheck/>
-            </div>
-        },
+        icon : <FaCheck/>,
         closeButton : true,
-        theme : "light",
+        hideProgressBar : true,
     } )
 }

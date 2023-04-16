@@ -13,6 +13,7 @@ import { ModalData } from "@/application/component/modal/ModalContext";
 import { ToastData } from "@/application/component/alert/ToastData";
 import React from "react";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function RootLayout( {
@@ -32,13 +33,10 @@ export default function RootLayout( {
             <title>ASTRA HONDA</title>
         </Head>
         <body className = "hold-transition light-skin sidebar-mini theme-primary fixed">
-
         <ModalData>
-            <ToastContainer
-                autoClose = { false }
-                closeOnClick = { true }/>
             <ToastData>
                 <div className = "wrapper">
+                    <ToastContainer/>
                     <HeaderLayout/>
                     <SideBarLayout/>
                     { children }

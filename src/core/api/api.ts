@@ -7,8 +7,8 @@ import HandlerResponse from "@/core/api/HandlerResponse";
 axios.interceptors.request.use( request => {
     console.debug( 'METHOD : ', request.method );
     console.debug( 'URL : ', request.url );
-    console.debug( 'Request Headers : ', JSON.stringify( request.headers ) );
-    console.debug( 'Request Data : ', JSON.stringify( request.data ?? {} ) );
+    console.debug( 'Request Headers : ', request.headers );
+    console.debug( 'Request Data : ', request.data ?? {} );
     console.debug( 'REQUEST...' + '\n' );
     console.debug( '\n' );
     return request;
@@ -19,15 +19,15 @@ axios.interceptors.response.use(
         console.debug( 'RESPONSE : ' );
         console.debug( 'Response Status : ', response.status );
         console.debug( 'PATH : ', response.request.responseURL );
-        console.debug( 'Response Headers : ', JSON.stringify( response.headers ) );
-        console.debug( 'Response Body : ', JSON.stringify( response.data ) );
+        console.debug( 'Response Headers : ', response.headers );
+        console.debug( 'Response Body : ', response.data );
         return response;
     },
     error => {
         console.debug( 'RESPONSE : ' );
         console.debug( 'Response Status : ', error.response?.status );
-        console.debug( 'Response Headers : ', JSON.stringify( error.response?.headers ) );
-        console.debug( 'Response Body : ', JSON.stringify( error.response?.data ) );
+        console.debug( 'Response Headers : ', error.response?.headers );
+        console.debug( 'Response Body : ', error.response?.data );
         return Promise.reject( error );
     },
 );
@@ -56,7 +56,8 @@ class Api {
             }
             if ( resp.status === 201 ) {
                 HandlerResponse.success( 'Success add data' )
-                return JSON.stringify( resp.data );
+                // return JSON.stringify( resp.data );
+                return null;
             }
             return null;
         } catch ( e ) {

@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
     DatumResponsePengajuanEntity
 } from "@/repository/admin/daftar_pengajuan_repository/entity/ResponsePengajuanEntity";
-import { EnumStatus } from "@/utils/enum/status/EnumStatus";
 import FormatDate from "@/utils/utils/format_date/FormatDate";
 import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
 import { ModelSelectOption } from "@/application/component/input/model/ModelSelectOption";
@@ -12,10 +11,14 @@ import { ModelDaftarPengajuanUser } from "@/view/after_login/user/daftar_pengaju
 import {
     DaftarPengajuanUserRepository
 } from "@/repository/user/daftar_pengajuan_repository/DaftarPengajuanUserRepository";
+import { useRouter } from "next/navigation";
+import { ModalContext } from "@/application/component/modal/ModalContext";
+import StatusFormat from "@/utils/utils/status/StatusFormat";
 
 
 export const DaftarPengajuanUserViewModel = () => {
-
+    const modal = useContext( ModalContext );
+    const route = useRouter()
     const [ loading, setLoading ] = useState( false );
 
     const [ search, setSearch ] = useState( '' );
@@ -26,7 +29,14 @@ export const DaftarPengajuanUserViewModel = () => {
 
     const [ addPengajuan, setAddPengajaun ] = useState<ModelAddPengajuan>();
 
+    const [ page, setPage ] = useState( 1 );
+
     const listPrioritas : ModelSelectOption[] = [
+        {
+            key : '0',
+            value : '',
+            title : 'Pilih Prioritas',
+        },
         {
             key : '1',
             value : 'Low',
@@ -44,23 +54,25 @@ export const DaftarPengajuanUserViewModel = () => {
         },
     ]
 
-    const getListPengajuan = async () => {
+    const getListPengajuan = async ( page : number, limit : number ) => {
         setLoading( true );
-        const response = await DaftarPengajuanUserRepository()
+        const response = await DaftarPengajuanUserRepository( page, limit )
         if ( response !== null ) {
             const dataList : ModelDaftarPengajuanUser[] = response.data.map( ( item : DatumResponsePengajuanEntity ) => {
-                const status = item.status ?? '';
                 return {
                     id : item.id,//item.id ?? 0,
                     namaBarang : item.pengajuan_name ?? '',
                     namaPemohon : item.pengajuan_name,//item.vendor ?? '',
                     tanggalPengajuan : FormatDate.stringDateToStringLocale( item.tanggal_pengajuan ),
-                    departemen : 'Departemen',//item.departemen ?? ''
+                    departemen : item.departemen,//item.departemen ?? ''
                     prioritas : item.prioritas === 'High' ? EnumPrioritas.high : item.prioritas === 'Medium' ? EnumPrioritas.medium : EnumPrioritas.low,
-                    status : status === 'Selesai' ? EnumStatus.selesai : status === 'Proses Vendor' ? EnumStatus.dalamProses : EnumStatus.undefined
+                    status : StatusFormat.getStatus( item.status ?? '' ),
                 }
             } );
-            setListPengajuan( dataList );
+            setListPengajuan( ( prevState ) => [
+                ...prevState,
+                ...dataList
+            ] );
         }
         setLoading( false );
     }
@@ -73,23 +85,33 @@ export const DaftarPengajuanUserViewModel = () => {
     }
 
     const doAddPengajuan = async ( dataToSend : ModelAddPengajuan | undefined ) => {
-        // console.log( dataToSend )
         const lengthFoto = dataToSend?.foto?.length ?? 0;
+        console.debug( 'dataToSend', dataToSend?.prioritas )
         if ( dataToSend?.deskripsi !== '' && lengthFoto > 0 && dataToSend?.namaPengajuan !== '' && dataToSend?.prioritas !== '' ) {
-            await RepositoryAddPengajuan( dataToSend ?? {
-                prioritas : '',
-                namaPengajuan : '',
-                deskripsi : '',
-                foto : []
-            } );
+            if ( dataToSend?.prioritas !== undefined ) {
+                await RepositoryAddPengajuan( dataToSend ?? {
+                    prioritas : '',
+                    namaPengajuan : '',
+                    deskripsi : '',
+                    foto : []
+                } ).then( () => {
+                    route.refresh()
+                } );
+                modal.hide();
+            }
+            else {
+                alert( 'Prioritas tidak boleh kosong' )
+            }
+
         }
         else {
             alert( 'Data tidak boleh kosong' );
         }
     }
 
+
     useEffect( () => {
-        getListPengajuan();
+        getListPengajuan( 0, 10 );
         return () => {
         };
     }, [] );
@@ -103,6 +125,8 @@ export const DaftarPengajuanUserViewModel = () => {
         search, setSearch,
         addPengajuan, setAddPengajaun,
         doAddPengajuan,
-        listPrioritas
+        listPrioritas,
+        getListPengajuan,
+        page, setPage, modal
     }
 }

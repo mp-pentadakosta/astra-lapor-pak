@@ -33,11 +33,7 @@ export default function AuthLayout( {
                   backgroundImage : "url(/images/auth-bg/bg-16.jpg)"
               } }>
         <ModalData>
-            <ToastContainer
-                position = "top-right"
-                autoClose = { 5000 }
-                hideProgressBar = { false }
-                closeOnClick = { true }/>
+            <ToastContainer/>
             <ToastData>
                 { children }
             </ToastData>
