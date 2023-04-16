@@ -3,6 +3,7 @@ import { StatusCardStyle } from "@/utils/component/status/StatusCardStyle";
 import Link from "next/link";
 import React from "react";
 import { ModelDaftarPenhajuan } from "@/view/after_login/admin/daftar_pengajuan/model/ModelDaftarPenhajuan";
+import { FaBuffer } from "react-icons/fa";
 
 
 interface InterfaceTableHistoryPengajaun {
@@ -73,8 +74,7 @@ export const TableHistoryPengajuan = ( props : InterfaceTableHistoryPengajaun ) 
                         <td className = "table-action min-w-100">
                             <Link href = { `/admin/daftar-pengajuan/` + item.id }
                                   className = "text-fade hover-primary">
-                                <i className = "align-middle fa fa-tags fa-lg">
-                                </i>
+                                <FaBuffer size = { 25 }/>
                             </Link>
                         </td>
                     </tr>

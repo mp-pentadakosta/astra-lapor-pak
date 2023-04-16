@@ -3,6 +3,7 @@ import { TableDaftarPengajaun } from "@/view/after_login/admin/daftar_pengajuan/
 import {
     DaftarPengajuanViewModel
 } from "@/view/after_login/admin/daftar_pengajuan/view_model/DaftarPengajuanViewModel";
+import { FaAngleDoubleDown } from "react-icons/fa";
 
 
 export const DaftarPengajuanView = () => {
@@ -48,7 +49,11 @@ export const DaftarPengajuanView = () => {
                                 <button type = "button"
                                         className = "btn btn-info-light ajax"
                                         title = "">
-                                    <i className = "fa fa-spin fa-refresh"></i>&nbsp; Cari Lagi
+                                    <FaAngleDoubleDown style = { {
+                                        marginRight : "5px"
+                                    } }/>
+                                    {/*<i className = "fa fa-spin fa-refresh"></i>&nbsp; */ }
+                                    Cari Lagi
                                 </button>
                             </div>
                         </div>

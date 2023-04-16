@@ -25,6 +25,11 @@ export default function RootLayout( {
             <meta name = "viewport" content = "width=device-width, initial-scale=1"/>
             <meta name = "description" content = ""/>
             <meta name = "author" content = ""/>
+            {/*<link rel = "stylesheet"*/ }
+            {/*      href = "https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/fontawesome.min.css"*/ }
+            {/*      integrity = "sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7"*/ }
+            {/*      crossOrigin = "anonymous"/>*/ }
+
             <title>ASTRA HONDA</title>
         </Head>
         <body className = "hold-transition light-skin sidebar-mini theme-primary fixed">

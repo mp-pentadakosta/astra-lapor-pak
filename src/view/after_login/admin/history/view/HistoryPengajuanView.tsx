@@ -1,4 +1,5 @@
 import { TableHistoryPengajuan } from "@/view/after_login/admin/daftar_pengajuan/component/TableHistoryPengajuan";
+import { FaAngleDoubleDown } from "react-icons/fa";
 
 
 export const HistoryPengajuanView = () => {
@@ -7,7 +8,7 @@ export const HistoryPengajuanView = () => {
             <div className = "col-12 col-xl-12">
                 <div className = "card">
                     <div className = "card-header">
-                        <h5 className = "card-title">Daftar Pengajuan</h5>
+                        <h5 className = "card-title">History Pengajuan</h5>
                         <p className = "mb-0 card-subtitle text-muted">
                         </p>
                     </div>
@@ -32,7 +33,11 @@ export const HistoryPengajuanView = () => {
                                 <button type = "button"
                                         className = "btn btn-info-light ajax"
                                         title = "">
-                                    <i className = "fa fa-spin fa-refresh"></i>&nbsp; Cari Lagi
+                                    <FaAngleDoubleDown style = { {
+                                        marginRight : "5px"
+                                    } }/>
+                                    {/*<i className = "fa fa-spin fa-refresh"></i>&nbsp; */ }
+                                    Cari Lagi
                                 </button>
                             </div>
                         </div>
