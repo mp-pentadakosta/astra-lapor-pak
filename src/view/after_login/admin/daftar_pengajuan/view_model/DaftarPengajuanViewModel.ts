@@ -8,7 +8,6 @@ import { EnumStatus } from "@/utils/enum/status/EnumStatus";
 import FormatDate from "@/utils/utils/format_date/FormatDate";
 import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
 import { ModelSelectOption } from "@/application/component/input/model/ModelSelectOption";
-import { RepositoryAddPengajuan } from "@/repository/user/add_pengajuan/RepositoryAddPengajuan";
 
 
 export const DaftarPengajuanViewModel = () => {

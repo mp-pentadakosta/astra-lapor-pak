@@ -9,7 +9,6 @@ import { ModalContext } from "@/application/component/modal/ModalContext";
 
 
 export const DaftarPengajuanView = () => {
-    const modal = useContext( ModalContext );
     const {
         listPengajuan,
         loading,
