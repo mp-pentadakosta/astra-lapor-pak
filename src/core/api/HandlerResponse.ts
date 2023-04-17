@@ -3,7 +3,7 @@ import { ErrorResponse, ErrorSuccess } from "@/core/api/ErrorResponse";
 
 class HandlerResponse {
     public success( data : any ) {
-        ErrorSuccess( 'Success Tambah Data' )
+        ErrorSuccess( data )
     }
 
     public badRequest( data : any ) {

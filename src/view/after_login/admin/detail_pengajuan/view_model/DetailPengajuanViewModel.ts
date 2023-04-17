@@ -7,6 +7,8 @@ import { VendorRepository } from "@/repository/vendor/list_vendor/VendorReposito
 import { ModelVendor } from "@/view/after_login/admin/daftar_vendor/model/ModelVendor";
 import { ModelTerimaPengajuan } from "@/view/after_login/admin/detail_pengajuan/model/ModelTerimaPengajuan";
 import { RepositoryTerimaPengajuan } from "@/repository/admin/terima_pengajuan/RepositoryTerimaPengajuan";
+import { RepositoryProsesAdmin } from "@/repository/admin/proses_admin/RepositoryProsesAdmin";
+import { RepositoryTolakPengajuan } from "@/repository/admin/tolak_pengajuan/RepositoryTolakPengajuan";
 
 
 export const DetailPengajuanViewModel = () => {
@@ -54,6 +56,16 @@ export const DetailPengajuanViewModel = () => {
         modal.hide();
     }
 
+    const pengajuanSelesai = async () => {
+        const resp = await RepositoryProsesAdmin( getId() );
+        modal.hide();
+    }
+
+    const tolakPengajuan = async () => {
+        const resp = await RepositoryTolakPengajuan( getId() );
+        modal.hide();
+    }
+
     useEffect( () => {
         getDetailData();
         getVendor();
@@ -69,5 +81,7 @@ export const DetailPengajuanViewModel = () => {
         patchPengajuan,
         terimaPengajuan,
         setTerimaPengajuan,
+        pengajuanSelesai,
+        tolakPengajuan
     }
 }

@@ -16,7 +16,9 @@ export const DetailPengajuanView = () => {
         detailPengajuan,
         modal,
         vendor,
-        patchPengajuan
+        patchPengajuan,
+        pengajuanSelesai,
+        tolakPengajuan,
     } = DetailPengajuanViewModel()
     return <section className = "invoice printableArea" style = { {} }>
         <div className = "row">
@@ -104,7 +106,7 @@ export const DetailPengajuanView = () => {
                         {
                             detailPengajuan?.data.foto.map( ( item, index ) => {
                                 return <div key = { index }
-                                            className = { `col-12 col-md-3` }
+                                            className = { `col-12 col-md-6` }
                                             style = { {
                                                 boxShadow : '0 0 10px 0 rgba(0,0,0,0.3)',
                                                 borderRadius : '10px',
@@ -113,11 +115,13 @@ export const DetailPengajuanView = () => {
                                                 justifyContent : 'center',
                                                 display : 'flex',
                                                 margin : '10px',
+                                                maxWidth : '300px',
                                             } }>
-                                    <img className = { `col-12` } style = { {
-                                        borderRadius : '10px',
-                                        maxHeight : '200px',
-                                    } }
+                                    <img className = { `col-12` }
+                                         style = { {
+                                             borderRadius : '10px',
+                                             maxHeight : '200px',
+                                         } }
                                          src = { item.file_photo }
                                          alt = { 'img' }/>
                                 </div>
@@ -144,12 +148,14 @@ export const DetailPengajuanView = () => {
                     flexDirection : 'row',
                     justifyContent : 'space-between',
                 } }>
-                    <ButtonPrimary type = { 'btn-danger' }
-                                   label = { 'Tolak Pengajuan' }
-                                   onClick = { () => {
-                                       modal.show();
-                                       modal.body( modalTolak() )
-                                   } }/>
+                    { detailPengajuan?.data.status === 'Verifikasi Admin' ?
+                        <ButtonPrimary type = { 'btn-danger' }
+                                       label = { 'Tolak Pengajuan' }
+                                       onClick = { () => {
+                                           modal.show();
+                                           modal.body( modalTolak() )
+                                       } }/> : <div></div>
+                    }
                     <div style = { {
                         display : 'flex',
                         flexDirection : 'row',
@@ -157,10 +163,20 @@ export const DetailPengajuanView = () => {
                     } }>
                         <a href = "javascript:window.print()"
                            className = "btn btn-primary-light me-10"><i className = "mdi mdi-printer"></i> Print</a>
-                        <ButtonPrimary label = { 'Terima Pengajuan' } onClick = { () => {
-                            modal.show();
-                            modal.body( modalDataBody() )
-                        } }/>
+                        {
+                            detailPengajuan?.data.status === 'Verifikasi Admin' ?
+                                <ButtonPrimary label = { 'Terima Pengajuan' } onClick = { () => {
+                                    modal.show();
+                                    modal.body( modalDataBody() )
+                                } }/> : null
+                        }
+                        {
+                            detailPengajuan?.data.status === 'Proses Admin' ?
+                                <ButtonPrimary label = { 'Pengajuan Selesai' } onClick = { () => {
+                                    modal.show();
+                                    modal.body( modalPengajuanSelesai() )
+                                } }/> : null
+                        }
                     </div>
                 </div>
             </div>
@@ -258,7 +274,9 @@ export const DetailPengajuanView = () => {
                         <ButtonPrimary
                             onClick = { () => {
 
-                                patchPengajuan( detailPengajuan?.data.id ?? 0, dataToSend );
+                                patchPengajuan( detailPengajuan?.data.id ?? 0, dataToSend ).then( () => {
+                                    // window.location.reload()
+                                } );
 
                             } }
                             label = { 'Terima Pengajuan' }/>
@@ -272,7 +290,7 @@ export const DetailPengajuanView = () => {
         return <div className = "modal-dialog modal-dialog-centered">
             <div className = "modal-content">
                 <div className = "modal-header">
-                    <h4 className = "modal-title" id = "myCenterModalLabel">Terima Pengajaun</h4>
+                    <h4 className = "modal-title" id = "myCenterModalLabel">Tolak Pengajaun</h4>
                     <button type = "button"
                             className = "btn-close"
                             onClick = { () => {
@@ -280,7 +298,7 @@ export const DetailPengajuanView = () => {
                             } }></button>
                 </div>
                 <div className = "modal-body">
-                    <h6>Yakin Tolak Pengjuan ?</h6>
+                    <h6>Yakin Tolak Pengajuan ?</h6>
                 </div>
                 <div className = { `modal-footer` }>
                     <div style = { {
@@ -297,9 +315,51 @@ export const DetailPengajuanView = () => {
                         <ButtonPrimary
                             type = { "btn-danger" }
                             onClick = { () => {
-
+                                tolakPengajuan().then( () => {
+                                    // // window.location.reload()
+                                } );
                             } }
                             label = { 'Tolak Pengajuan' }/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    function modalPengajuanSelesai() {
+        return <div className = "modal-dialog modal-dialog-centered">
+            <div className = "modal-content">
+                <div className = "modal-header">
+                    <h4 className = "modal-title" id = "myCenterModalLabel">Pengajaun Selesai</h4>
+                    <button type = "button"
+                            className = "btn-close"
+                            onClick = { () => {
+                                modal.hide();
+                            } }></button>
+                </div>
+                <div className = "modal-body">
+                    <h6>Apakah pengajuan telah selesai ?</h6>
+                </div>
+                <div className = { `modal-footer` }>
+                    <div style = { {
+                        display : 'flex',
+                        flexDirection : 'row',
+                        justifyContent : 'space-between',
+                    } }>
+                        <ButtonPrimary
+                            type = { "btn-danger" }
+                            onClick = { () => {
+                                modal.hide();
+                            } }
+                            label = { 'Tidak' }/>
+                        <ButtonPrimary
+                            label = { 'Ya' }
+                            onClick = { () => {
+                                pengajuanSelesai().then( () => {
+                                    // window.location.reload()
+                                } )
+                            } }
+                            type = { "btn-primary" }/>
                     </div>
                 </div>
             </div>

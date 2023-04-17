@@ -55,7 +55,7 @@ class Api {
                 return JSON.stringify( resp.data );
             }
             if ( resp.status === 201 ) {
-                HandlerResponse.success( 'Success add data' )
+                HandlerResponse.success( resp.data?.message )
                 // return JSON.stringify( resp.data );
                 return null;
             }
