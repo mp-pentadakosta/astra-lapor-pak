@@ -15,7 +15,7 @@ export const TableDaftarPengajaunUser = ( props : InterfaceTableDaftarPengajaun 
     const route = useRouter()
     return <>
         <div className = { `table-responsive` } style = { {
-            maxHeight : "650px",
+            maxHeight : "500px",
         } }>
             <table className = "table">
                 <thead style = { {
