@@ -3,6 +3,7 @@ import { ModelDaftarPenhajuan } from "@/view/after_login/admin/daftar_pengajuan/
 import React from "react";
 import { PriorotasCardStyle } from "@/utils/component/prioritas/PriorotasCardStyle";
 import { useRouter } from "next/navigation";
+import useWindowSize from "@rooks/use-window-size";
 
 
 interface InterfaceTableDaftarPengajaun {
@@ -13,9 +14,12 @@ interface InterfaceTableDaftarPengajaun {
 
 export const TableDaftarPengajaunUser = ( props : InterfaceTableDaftarPengajaun ) => {
     const route = useRouter()
+    const size = useWindowSize();
+
+    let sizeWidth = size.innerWidth ?? 1000;
     return <>
         <div className = { `table-responsive` } style = { {
-            maxHeight : "400px",
+            maxHeight : sizeWidth > 768 ? "500px" : "200px",
         } }>
             <table className = "table">
                 <thead style = { {
