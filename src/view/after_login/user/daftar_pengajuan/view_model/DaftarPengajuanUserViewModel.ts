@@ -11,7 +11,7 @@ import { ModelDaftarPengajuanUser } from "@/view/after_login/user/daftar_pengaju
 import {
     DaftarPengajuanUserRepository
 } from "@/repository/user/daftar_pengajuan_repository/DaftarPengajuanUserRepository";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { ModalContext } from "@/application/component/modal/ModalContext";
 import StatusFormat from "@/utils/utils/status/StatusFormat";
 
@@ -19,7 +19,10 @@ import StatusFormat from "@/utils/utils/status/StatusFormat";
 export const DaftarPengajuanUserViewModel = () => {
     const modal = useContext( ModalContext );
     const route = useRouter()
+    const path = usePathname();
     const [ loading, setLoading ] = useState( false );
+
+    const [ loadingAdd, setLoadingAdd ] = useState( false );
 
     const [ search, setSearch ] = useState( '' );
 
@@ -89,13 +92,14 @@ export const DaftarPengajuanUserViewModel = () => {
         console.debug( 'dataToSend', dataToSend?.prioritas )
         if ( dataToSend?.deskripsi !== '' && lengthFoto > 0 && dataToSend?.namaPengajuan !== '' && dataToSend?.prioritas !== '' ) {
             if ( dataToSend?.prioritas !== undefined ) {
+                setLoadingAdd( true )
                 await RepositoryAddPengajuan( dataToSend ?? {
                     prioritas : '',
                     namaPengajuan : '',
                     deskripsi : '',
                     foto : []
                 } ).then( () => {
-                    route.refresh()
+                    route.replace( path );
                 } );
                 modal.hide();
             }
@@ -107,6 +111,7 @@ export const DaftarPengajuanUserViewModel = () => {
         else {
             alert( 'Data tidak boleh kosong' );
         }
+        setLoadingAdd( false )
     }
 
 
@@ -127,6 +132,7 @@ export const DaftarPengajuanUserViewModel = () => {
         doAddPengajuan,
         listPrioritas,
         getListPengajuan,
-        page, setPage, modal
+        page, setPage, modal,
+        loadingAdd
     }
 }

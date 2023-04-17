@@ -1,10 +1,16 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { DetailPengajuanRepository } from "@/repository/admin/detail_pengajuan_repository/DetailPengajuanRepository";
 import { ResponseDetailEntity } from "@/repository/admin/detail_pengajuan_repository/entity/ResponseDetailEntity";
+import { ModalContext } from "@/application/component/modal/ModalContext";
+import { VendorRepository } from "@/repository/vendor/list_vendor/VendorRepository";
+import { ModelVendor } from "@/view/after_login/admin/daftar_vendor/model/ModelVendor";
+import { ModelTerimaPengajuan } from "@/view/after_login/admin/detail_pengajuan/model/ModelTerimaPengajuan";
+import { RepositoryTerimaPengajuan } from "@/repository/admin/terima_pengajuan/RepositoryTerimaPengajuan";
 
 
 export const DetailPengajuanViewModel = () => {
+    const modal = useContext( ModalContext );
     const pathname = usePathname();
 
     const [ detailPengajuan, setDetailPengajuan ] = useState<ResponseDetailEntity>();
@@ -24,14 +30,44 @@ export const DetailPengajuanViewModel = () => {
         }
     }
 
+    const [ vendor, setVendor ] = useState<ModelVendor[]>( [] );
+
+    const getVendor = async () => {
+        const resp = await VendorRepository();
+        if ( resp !== null ) {
+            const dataVendor : ModelVendor[] = resp.data.map( ( item ) => {
+                return {
+                    id : item.id,
+                    namaVendor : item.nama_vendor,
+                    pemilikVendor : item.pemilik_vendor,
+                    alamat : item.alamat,
+                    telpon : item.telpon,
+                }
+            } )
+            setVendor( dataVendor );
+        }
+    };
+
+    const [ terimaPengajuan, setTerimaPengajuan ] = useState<ModelTerimaPengajuan>();
+    const patchPengajuan = async ( id : number, data : ModelTerimaPengajuan ) => {
+        const resp = await RepositoryTerimaPengajuan( id, data );
+        modal.hide();
+    }
+
     useEffect( () => {
         getDetailData();
+        getVendor();
         return () => {
         };
     }, [] );
 
 
     return {
-        detailPengajuan
+        detailPengajuan,
+        modal,
+        vendor,
+        patchPengajuan,
+        terimaPengajuan,
+        setTerimaPengajuan,
     }
 }

@@ -1,7 +1,6 @@
 "use client";
 import { FaAngleDoubleDown } from "react-icons/fa";
-import React, { useContext } from "react";
-import { ModalContext } from "@/application/component/modal/ModalContext";
+import React from "react";
 import { FaPlus } from "react-icons/fa";
 import { TextInputPrimary } from "@/application/component/input/TextInputPrimary";
 import { InputSelectOption } from "@/application/component/input/InputSelectOption";
@@ -30,6 +29,7 @@ export const DaftarPengajuanUserView = () => {
         getListPengajuan,
         page,
         setPage,
+        loadingAdd
     } = DaftarPengajuanUserViewModel();
 
 
@@ -42,7 +42,7 @@ export const DaftarPengajuanUserView = () => {
                         <div className = "mb-0 card-subtitle text-muted">
                             <button type = "button" className = "btn btn-primary" onClick = { () => {
                                 modal.show();
-                                modal.body( modalDataBody( addPengajuan ) );
+                                modal.body( modalDataBody( addPengajuan, loadingAdd ) );
                             } }>
                                 <FaPlus style = { {
                                     marginRight : '0.5rem'
@@ -94,7 +94,7 @@ export const DaftarPengajuanUserView = () => {
         </div>
     </section>
 
-    function modalDataBody( data : ModelAddPengajuan | undefined ) {
+    function modalDataBody( data : ModelAddPengajuan | undefined, loadingAdd : boolean ) {
         let dataToSend = data;
         return <div className = "modal-dialog modal-dialog-centered">
             <div className = "modal-content">
@@ -161,11 +161,13 @@ export const DaftarPengajuanUserView = () => {
                             type = { "btn-danger" }/>
                         <ButtonPrimary
                             onClick = { () => {
-                                doAddPengajuan( dataToSend ).then( () => {
-                                } );
+                                if ( !loadingAdd ) {
+                                    doAddPengajuan( dataToSend ).then( () => {
+                                    } );
+                                }
 
                             } }
-                            label = { 'Simpan' }/>
+                            label = { loadingAdd ? "Sedang Menyimpan" : 'Simpan' }/>
                     </div>
                 </div>
             </div>

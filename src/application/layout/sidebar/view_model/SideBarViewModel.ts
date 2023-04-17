@@ -6,7 +6,7 @@ import { getCookie } from "cookies-next";
 
 export const SideBarViewModel = () => {
 
-    const sideBarItemsAdmin : ModelSideBar[] = [
+    const [ sideBarItemsAdmin, setSideBarItemsAdmin ] = useState<ModelSideBar[]>( [
         {
             key : "dashboard",
             title : "Dashboard",
@@ -25,7 +25,9 @@ export const SideBarViewModel = () => {
             route : "/history-pengajuan",
             icon : "database",
         },
-    ]
+    ] );
+
+    // const sideBarItemsAdmin : ModelSideBar[] =
 
     const [ header, setHeader ] = useState<ModelLayout>();
 
@@ -42,6 +44,18 @@ export const SideBarViewModel = () => {
             role : role as string,
             route : role === 'admin' ? '/admin' : role === 'user' ? '/user' : role === 'atasan' ? '/atasan' : '/'
         } );
+
+        if ( role === 'admin' ) {
+            setSideBarItemsAdmin( ( prevState ) => [
+                ...prevState,
+                {
+                    key : "vendor",
+                    title : "Daftar Vendor",
+                    route : "/daftar-vendor",
+                    icon : "command",
+                }
+            ] )
+        }
     }
 
     useEffect( () => {

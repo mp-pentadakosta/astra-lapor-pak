@@ -27,9 +27,20 @@ export interface DataResponseDetailEntity {
     is_deleted : null;
     createdAt : Date;
     updatedAt : Date;
-    vendor : null;
+    vendor : DataVendor | null;
     foto : FotoResponseDetailEntity[];
     aktivitas : AktivitaResponseDetailEntity[];
+}
+
+export interface DataVendor {
+    id : number;
+    nama_vendor : string;
+    pemilik_vendor : string;
+    alamat : string;
+    telpon : string;
+    is_deleted : null;
+    createdAt : Date;
+    updatedAt : Date;
 }
 
 export interface AktivitaResponseDetailEntity {
