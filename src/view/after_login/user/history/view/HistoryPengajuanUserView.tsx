@@ -1,8 +1,19 @@
-import { TableHistoryPengajuan } from "@/view/after_login/admin/daftar_pengajuan/component/TableHistoryPengajuan";
+"use client";
+import { TableHistoryPengajuan } from "@/utils/component/table/TableHistoryPengajuan";
 import { FaAngleDoubleDown } from "react-icons/fa";
+import { HistoryUserViewModel } from "@/view/after_login/user/history/view_model/HistoryUserViewModel";
 
 
 export const HistoryPengajuanUserView = () => {
+    const {
+        history,
+        getHistory,
+        loading,
+        searchHistory,
+        getSearchHistory,
+        searchData,
+        setSearchData,
+    } = HistoryUserViewModel()
     return <section className = "content">
         <div className = "row">
             <div className = "col-12 col-xl-12">
@@ -20,14 +31,18 @@ export const HistoryPengajuanUserView = () => {
                                         <input type = "text"
                                                className = "form-control"
                                                id = "nama"
+                                               onChange = { ( event ) => {
+                                                   setSearchData( event.target.value );
+                                                   getSearchHistory( event.target.value );
+                                               } }
                                                placeholder = "Cari..."/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <TableHistoryPengajuan
-                            loading = { false }
-                            listPengajuan = { [] }/>
+                            loading = { loading }
+                            listPengajuan = { searchData.length > 0 ? searchHistory : history }/>
                         <div className = "row">
                             <div className = "col-12 text-center">
                                 <button type = "button"

@@ -1,25 +1,36 @@
+import { PriorotasCardStyle } from "@/utils/component/prioritas/PriorotasCardStyle";
 import { StatusCardStyle } from "@/utils/component/status/StatusCardStyle";
 import Link from "next/link";
-import { ModelDaftarPenhajuan } from "@/view/after_login/admin/daftar_pengajuan/model/ModelDaftarPenhajuan";
 import React from "react";
-import { PriorotasCardStyle } from "@/utils/component/prioritas/PriorotasCardStyle";
 import { FaBuffer } from "react-icons/fa";
+import { DatumResponseHistoryEntity } from "@/repository/admin/history/entity/ResponseHistoryEntity";
+import FormatDate from "@/utils/utils/format_date/FormatDate";
+import { useRouter } from "next/navigation";
+import useWindowSize from "@rooks/use-window-size";
 
 
-interface InterfaceTableDaftarPengajaun {
+interface InterfaceTableHistoryPengajaun {
     loading : boolean
-    listPengajuan : ModelDaftarPenhajuan[]
+    listPengajuan : DatumResponseHistoryEntity[]
 }
 
-export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) => {
+export const TableHistoryPengajuan = ( props : InterfaceTableHistoryPengajaun ) => {
+    const size = useWindowSize()
+    let sizeWidth = size.innerWidth ?? 1000;
     return <>
-        <div className = { `table-responsive` }>
+        <div className = { `table-responsive` } style = { {
+            maxHeight : sizeWidth > 768 ? "500px" : "300px",
+        } }>
             <table className = "table">
                 <thead>
                 <tr>
                     <th style = { {
+                        width : "5%",
+                    } }>No
+                    </th>
+                    <th style = { {
                         width : "15%",
-                    } }>Nama Barang
+                    } }>Nama Pengajuan
                     </th>
                     <th style = { {
                         width : "15%",
@@ -29,21 +40,20 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
                         width : "15%",
                     } }>Departemen
                     </th>
-                    <th style = { {
-                        width : "15%",
-                    } }>Tanggal Pengajuan
+                    <th className = "d-none d-md-table-cell"
+                        style = { {
+                            width : "15%",
+                        } }>Tanggal Pengajuan
                     </th>
-                    <th style = { {
-                        width : "10%",
-                    } }>Prioritas
+                    <th className = "d-none d-md-table-cell"
+                        style = { {
+                            width : "15%",
+                        } }>Prioritas
                     </th>
-                    <th style = { {
-                        width : "10%",
-                    } }>Status
-                    </th>
-                    <th style = { {
-                        width : "10%",
-                    } }>Actions
+                    <th className = "d-none d-md-table-cell"
+                        style = { {
+                            width : "15%",
+                        } }>Status
                     </th>
                 </tr>
                 </thead>
@@ -51,10 +61,11 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
                 {
                     props.listPengajuan.map( ( item, index ) => {
                         return <tr key = { index }>
-                            <td>{ item.namaBarang }</td>
-                            <td>{ item.namaPemohon }</td>
+                            <td>{ index + 1 }</td>
+                            <td>{ item.pengajuan_name }</td>
+                            <td>{ item.user_id }</td>
                             <td>{ item.departemen }</td>
-                            <td>{ item.tanggalPengajuan }</td>
+                            <td>{ FormatDate.stringDateToStringLocale( item.tanggal_pengajuan ) }</td>
                             <td>
                                 <div style = { {
                                     display : "flex",
@@ -62,18 +73,12 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
                                     <PriorotasCardStyle data = { item.prioritas }/>
                                 </div>
                             </td>
-                            <td>
+                            <td className = "d-none d-md-table-cell text-fade">
                                 <div style = { {
                                     display : "flex",
                                 } }>
                                     <StatusCardStyle data = { item.status }/>
                                 </div>
-                            </td>
-                            <td className = "table-action min-w-100">
-                                <Link href = { `/admin/daftar-pengajuan/` + item.id }
-                                      className = "text-fade hover-primary">
-                                    <FaBuffer size = { 25 }/>
-                                </Link>
                             </td>
                         </tr>
                     } )
@@ -81,6 +86,7 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
                 </tbody>
             </table>
         </div>
+
         {
             props.loading ? <div style = { {
                 display : "flex",
@@ -104,5 +110,3 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
         }
     </>
 }
-
-

@@ -60,17 +60,17 @@ export const DashboardUserView = () => {
             </div>
             <div className = "col-xl-12 col-12">
                 <div className = "row">
-                    <div className = "col-6 col-md-3">
+                    <div className = "col-6 col-md-4">
                         <a className = "box box-link-shadow text-center pull-up" href = "javascript:void(0)">
                             <div className = "box-body py-5 bg-primary-light px-5">
                                 <p className = "fw-500 text-primary text-overflow">Pengajuan Minggu Ini</p>
                             </div>
                             <div className = "box-body p-10">
-                                <h1 className = "countnm fs-40 m-0">5</h1>
+                                <h1 className = "countnm fs-40 m-0">50</h1>
                             </div>
                         </a>
                     </div>
-                    <div className = "col-6 col-md-3">
+                    <div className = "col-6 col-md-4">
                         <a className = "box box-link-shadow text-center pull-up" href = "javascript:void(0)">
                             <div className = "box-body py-5 bg-primary-light px-5">
                                 <p className = "fw-500 text-primary text-overflow">Pengajuan Diterima</p>
@@ -80,20 +80,10 @@ export const DashboardUserView = () => {
                             </div>
                         </a>
                     </div>
-                    <div className = "col-6 col-md-3">
+                    <div className = "col-6 col-md-4">
                         <a className = "box box-link-shadow text-center pull-up" href = "javascript:void(0)">
                             <div className = "box-body py-5 bg-primary-light px-5">
                                 <p className = "fw-500 text-primary text-overflow">Pengajuan Ditolak</p>
-                            </div>
-                            <div className = "box-body p-10">
-                                <h1 className = "countnm fs-40 m-0">25</h1>
-                            </div>
-                        </a>
-                    </div>
-                    <div className = "col-6 col-md-3">
-                        <a className = "box box-link-shadow text-center pull-up" href = "javascript:void(0)">
-                            <div className = "box-body py-5 bg-primary-light px-5">
-                                <p className = "fw-500 text-primary text-overflow">Total Vendor</p>
                             </div>
                             <div className = "box-body p-10">
                                 <h1 className = "countnm fs-40 m-0">25</h1>

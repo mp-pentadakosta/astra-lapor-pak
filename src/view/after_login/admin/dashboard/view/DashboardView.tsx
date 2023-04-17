@@ -66,7 +66,7 @@ export const DashboardView = () => {
                                 <p className = "fw-500 text-primary text-overflow">Pengajuan Minggu Ini</p>
                             </div>
                             <div className = "box-body p-10">
-                                <h1 className = "countnm fs-40 m-0">5</h1>
+                                <h1 className = "countnm fs-40 m-0">50</h1>
                             </div>
                         </a>
                     </div>
@@ -96,7 +96,7 @@ export const DashboardView = () => {
                                 <p className = "fw-500 text-primary text-overflow">Total Vendor</p>
                             </div>
                             <div className = "box-body p-10">
-                                <h1 className = "countnm fs-40 m-0">25</h1>
+                                <h1 className = "countnm fs-40 m-0">4</h1>
                             </div>
                         </a>
                     </div>

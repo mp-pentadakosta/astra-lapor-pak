@@ -11,7 +11,7 @@ import { ModelAddPengajuan } from "@/view/after_login/user/daftar_pengajuan/mode
 import {
     DaftarPengajuanUserViewModel
 } from "@/view/after_login/user/daftar_pengajuan/view_model/DaftarPengajuanUserViewModel";
-import { TableDaftarPengajaunUser } from "@/view/after_login/user/daftar_pengajuan/component/TableDaftarPengajaunUser";
+import { TableDaftarPengajaun } from "@/utils/component/table/TableDaftarPengajaun";
 
 
 export const DaftarPengajuanUserView = () => {
@@ -68,7 +68,7 @@ export const DaftarPengajuanUserView = () => {
                                 </div>
                             </div>
                         </div>
-                        <TableDaftarPengajaunUser
+                        <TableDaftarPengajaun
                             role = { 'user' }
                             loading = { loading }
                             listPengajuan = { search !== '' ? searchPengajuan : listPengajuan }/>

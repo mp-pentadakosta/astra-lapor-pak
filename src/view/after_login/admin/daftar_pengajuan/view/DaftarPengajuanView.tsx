@@ -4,7 +4,7 @@ import {
 } from "@/view/after_login/admin/daftar_pengajuan/view_model/DaftarPengajuanViewModel";
 import { FaAngleDoubleDown } from "react-icons/fa";
 import React from "react";
-import { TableDaftarPengajaunUser } from "@/view/after_login/user/daftar_pengajuan/component/TableDaftarPengajaunUser";
+import { TableDaftarPengajaun } from "@/utils/component/table/TableDaftarPengajaun";
 
 
 export const DaftarPengajuanView = () => {
@@ -47,7 +47,7 @@ export const DaftarPengajuanView = () => {
                                 </div>
                             </div>
                         </div>
-                        <TableDaftarPengajaunUser
+                        <TableDaftarPengajaun
                             role = { 'admin' }
                             loading = { loading }
                             listPengajuan = { search !== '' ? searchPengajuan : listPengajuan }/>
