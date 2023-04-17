@@ -31,9 +31,9 @@ export const DaftarPengajuanAtasanViewModel = () => {
                 return {
                     id : item.id,//item.id ?? 0,
                     namaBarang : item.pengajuan_name ?? '',
-                    namaPemohon : item.pengajuan_name,//item.vendor ?? '',
+                    namaPemohon : item.user.nama,//item.vendor ?? '',
                     tanggalPengajuan : FormatDate.stringDateToStringLocale( item.tanggal_pengajuan ),
-                    departemen : 'Departemen',//item.departemen ?? ''
+                    departemen : item.departemen,//item.departemen ?? ''
                     prioritas : item.prioritas === 'High' ? EnumPrioritas.high : item.prioritas === 'Medium' ? EnumPrioritas.medium : EnumPrioritas.low,
                     status : StatusFormat.getStatus( item.status ?? '' ),
                 }

@@ -4,6 +4,7 @@ import React from "react";
 
 
 export const ErrorResponse = ( data : string ) => {
+    // window.location.reload()
     toast.error( data, {
         style : {
             background : "#f44336",
@@ -16,6 +17,7 @@ export const ErrorResponse = ( data : string ) => {
 }
 
 export const ErrorSuccess = ( data : string ) => {
+    // window.location.reload()
     toast.success( data, {
         style : {
             background : "#4caf50",

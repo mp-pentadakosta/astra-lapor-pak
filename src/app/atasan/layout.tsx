@@ -13,6 +13,7 @@ import { ToastData } from "@/application/component/alert/ToastData";
 import { ModalData } from "@/application/component/modal/ModalContext";
 import React from "react";
 import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function RootLayout( {

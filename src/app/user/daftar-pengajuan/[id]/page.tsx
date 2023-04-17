@@ -1,4 +1,4 @@
-import { DetailPengajuanUserView } from "@/view/after_login/user/detail_pengajuan/view/DetailPengajuanUserView";
+import { DetailPengajuanUserView } from "@/view/after_login/user/detail_pengajuan/view/DetailPengajuanView";
 
 
 export default function DetailPengajuan() {

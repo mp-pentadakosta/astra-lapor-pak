@@ -163,7 +163,7 @@ export const DaftarPengajuanUserView = () => {
                             onClick = { () => {
                                 if ( !loadingAdd ) {
                                     doAddPengajuan( dataToSend ).then( () => {
-                                        window.location.reload()
+                                        // window.location.reload()
                                     } );
                                 }
                             } }
