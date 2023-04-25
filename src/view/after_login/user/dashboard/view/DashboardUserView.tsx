@@ -20,7 +20,6 @@ export const DashboardUserView = () => {
                                  margin: "30px",
                                  backgroundImage:
                                      "url(/img/img/logo-astra-full.png)",
-                                 //     "url(https://edulearn-lms-admin-template.multipurposethemes.com/images/svg-icon/color-svg/custom-30.svg)",
                                  backgroundPosition: "right bottom",
                                  backgroundSize: "auto 50%",
                              }}
@@ -29,31 +28,6 @@ export const DashboardUserView = () => {
                                 <div className="col-12 col-xl-7">
                                     <h1 className="mb-0 fw-600">Selamat Datang</h1>
                                     <p className="my-10 fs-16 text-white-70">{`${localeDay}`}</p>
-                                    {/*<p className = "my-10 fs-16 text-white-70">{ `${ localeTime }` }</p>*/}
-                                    {/*<div className = "mt-45 d-md-flex align-items-center">*/}
-                                    {/*    <div className = "me-30 mb-30 mb-md-0">*/}
-                                    {/*        <div className = "d-flex align-items-center">*/}
-                                    {/*            <div className = "me-15 text-center fs-24 w-50 h-50 l-h-50 bg-danger b-1 border-w rounded-circle">*/}
-                                    {/*                <i className = "fa fa-graduation-cap"></i>*/}
-                                    {/*            </div>*/}
-                                    {/*            <div>*/}
-                                    {/*                <h5 className = "mb-0">Students</h5>*/}
-                                    {/*                <p className = "mb-0 text-white-70">75,000+</p>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*    <div>*/}
-                                    {/*        <div className = "d-flex align-items-center">*/}
-                                    {/*            <div className = "me-15 text-center fs-24 w-50 h-50 l-h-50 bg-warning b-1 border-white rounded-circle">*/}
-                                    {/*                <i className = "fa fa-user"></i>*/}
-                                    {/*            </div>*/}
-                                    {/*            <div>*/}
-                                    {/*                <h5 className = "mb-0">Expert Mentors</h5>*/}
-                                    {/*                <p className = "mb-0 text-white-70">200+</p>*/}
-                                    {/*            </div>*/}
-                                    {/*        </div>*/}
-                                    {/*    </div>*/}
-                                    {/*</div>*/}
                                 </div>
                                 <div className="col-12 col-xl-5"></div>
                             </div>

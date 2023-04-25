@@ -20,7 +20,7 @@ export const DashboardAdminViewModel = () => {
     }
 
     const getPengajuanDiterima = async () => {
-        const resp = await DashboardAdminRepository("admin", EnumTipeDashboard.totalDiterima)
+        const resp = await DashboardAdminRepository("admin", EnumTipeDashboard.selesai)
         if (resp !== null) {
             setDashboard((prevState) => {
                 return {

@@ -1,6 +1,7 @@
 "use client";
-import React from "react";
 import {DetailVendorViewModel} from "@/view/after_login/admin/daftar_vendor/view_model/DetailVendorViewModel";
+import {Line} from "react-chartjs-2";
+import React from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -11,7 +12,6 @@ import {
     Tooltip,
     Legend,
 } from 'chart.js';
-import {Line} from 'react-chartjs-2';
 
 ChartJS.register(
     CategoryScale,
@@ -23,7 +23,7 @@ ChartJS.register(
     Legend
 );
 
-export const DetailVendorView = () => {
+export const ChartVendorView = () => {
     const {options, data} = DetailVendorViewModel()
 
     return <section className="content">

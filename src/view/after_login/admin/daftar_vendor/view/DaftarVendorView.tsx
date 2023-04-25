@@ -29,16 +29,25 @@ export const DaftarVendorView = () => {
                     <div className="card-header">
                         <h5 className="card-title">Daftar Vendor</h5>
                         <div className="mb-0 card-subtitle text-muted">
-                            <button type="button" className="btn btn-primary" onClick={() => {
-                                // modal.show();
-                                // modal.body( modalDataBody( addVendor, 'add' ) );
-                                route.push('/admin/tambah-daftar-vendor')
-                            }}>
-                                <FaPlus style={{
-                                    marginRight: '0.5rem'
-                                }}/>
-                                Tambah Vendor
-                            </button>
+                            <div className={`d-flex justify-content-between`}>
+                                <div className={`me-10`}>
+                                    <ButtonPrimary type={'btn-info'}
+                                                   label={'Lihat Chart Vendor'}
+                                                   onClick={() => {
+                                                       route.push('/admin/chart-vendor')
+                                                   }}/>
+                                </div>
+                                <div className={``}>
+                                    <button type="button" className="btn btn-primary" onClick={() => {
+                                        route.push('/admin/tambah-daftar-vendor')
+                                    }}>
+                                        <FaPlus style={{
+                                            marginRight: '0.5rem'
+                                        }}/>
+                                        Tambah Vendor
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="card-body">
