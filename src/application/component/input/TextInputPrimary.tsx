@@ -14,6 +14,7 @@ interface Interface {
     isError?: boolean
     messageError?: string
     data?: any
+    placeholder?: string
 }
 
 export const TextInputPrimary = (props: Interface,) => {
@@ -24,6 +25,7 @@ export const TextInputPrimary = (props: Interface,) => {
                {
                    ...props.data
                }
+               placeholder={props.placeholder}
                value={props.value}
                className={`form-control ${props.isError ? 'is-invalid' : ''}`}
                defaultValue={props.defaultValue}

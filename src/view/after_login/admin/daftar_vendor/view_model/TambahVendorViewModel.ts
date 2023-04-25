@@ -8,7 +8,6 @@ import {AddVendorRepository} from "@/repository/vendor/add_vendor/AddVendorRepos
 export const TambahVendorViewModel = () => {
     const router = useRouter();
 
-
     const validationSchema = Yup.object().shape({
         no_vendor: Yup.string(),
         nama_vendor: Yup.string().required('Nama Vendor harus di isi'),
