@@ -56,7 +56,7 @@ export const DaftarPengajuanView = () => {
                                 <button type="button"
                                         onClick={() => {
                                             setPage(page + 1);
-                                            getListPengajuan(page + 1, 10);
+                                            getListPengajuan(page, 10);
                                         }}
                                         className="btn btn-info-light ajax"
                                         title="">
