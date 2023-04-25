@@ -71,20 +71,22 @@ export const TambahPengajuanUserView = () => {
                                               }}/>
                         </div>
                         <div className={`card-footer`}>
-                            <div style={{
-                                display: 'flex',
-                                flexDirection: 'row',
-                                justifyContent: 'space-between',
-                            }}>
-                                <ButtonPrimary
-                                    label={'Kembali'}
-                                    type={"btn-danger"}
-                                    onClick={() => {
-                                        router.back()
-                                    }}/>
-                                <ButtonPrimary
-                                    data={'submit'}
-                                    label={'Simpan'}/>
+                            <div className={`row`}>
+                                <div className={`col-6`}>
+                                    <ButtonPrimary
+                                        label={'Kembali'}
+                                        type={"btn-danger"}
+                                        onClick={() => {
+                                            router.back()
+                                        }}/>
+                                </div>
+                                <div className={`col-6 d-flex justify-content-end`}>
+                                    <div className={``}>
+                                        <ButtonPrimary
+                                            data={'submit'}
+                                            label={'Simpan'}/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
