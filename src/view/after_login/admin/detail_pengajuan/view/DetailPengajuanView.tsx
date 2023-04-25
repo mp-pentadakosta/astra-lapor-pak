@@ -154,47 +154,43 @@ export const DetailPengajuanView = () => {
             </div>
 
             <div className="d-print-none mt-4">
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                }}>
-                    {detailPengajuan?.data.status === 'Verifikasi Admin' ?
-                        <ButtonPrimary type={'btn-danger'}
-                                       label={'Tolak Pengajuan'}
-                                       onClick={() => {
-                                           modal.show();
-                                           modal.body(modalTolak())
-                                       }}/> : <div></div>
-                    }
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'flex-end',
-                    }}>
+                <div className={`d-flex justify-content-between`}>
+                    <div>
+                        {detailPengajuan?.data.status === 'Verifikasi Admin' ?
+                            <ButtonPrimary type={'btn-danger'}
+                                           label={'Tolak Pengajuan'}
+                                           onClick={() => {
+                                               modal.show();
+                                               modal.body(modalTolak())
+                                           }}/> : <div></div>
+                        }
+                    </div>
+                    <div className={`d-flex justify-content-end`}>
                         <div className={`me-10`}>
                             <ButtonPrimary label={'Print'}
+                                           type={'btn-info'}
                                            onClick={() => {
                                                router.push('javascript:window.print()')
                                            }}/>
                         </div>
-                        {/*<a href="javascript:window.print()"*/}
-                        {/*   className="btn  me-10">*/}
-                        {/*    Print*/}
-                        {/*</a>*/}
+
                         {
                             detailPengajuan?.data.status === 'Verifikasi Admin' ?
-                                <ButtonPrimary label={'Terima Pengajuan'} onClick={() => {
-                                    modal.show();
-                                    modal.body(modalDataBody())
-                                }}/> : null
+                                <div className={`me-10`}>
+                                    <ButtonPrimary label={'Terima Pengajuan'} onClick={() => {
+                                        modal.show();
+                                        modal.body(modalDataBody())
+                                    }}/>
+                                </div> : null
                         }
                         {
                             detailPengajuan?.data.status === 'Proses Admin' ?
-                                <ButtonPrimary label={'Pengajuan Selesai'} onClick={() => {
-                                    modal.show();
-                                    modal.body(modalPengajuanSelesai())
-                                }}/> : null
+                                <div className={`me-10`}>
+                                    <ButtonPrimary label={'Pengajuan Selesai'} onClick={() => {
+                                        modal.show();
+                                        modal.body(modalPengajuanSelesai())
+                                    }}/>
+                                </div> : null
                         }
                     </div>
                 </div>
@@ -279,26 +275,25 @@ export const DetailPengajuanView = () => {
 
                 </div>
                 <div className={`modal-footer`}>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                    }}>
-                        <ButtonPrimary
-                            label={'Kembali'}
-                            onClick={() => {
-                                modal.hide();
-                            }}
-                            type={"btn-danger"}/>
-                        <ButtonPrimary
-                            onClick={() => {
+                    <div className={`d-flex justify-content-between`}>
+                        <div className={``}>
+                            <ButtonPrimary
+                                label={'Kembali'}
+                                onClick={() => {
+                                    modal.hide();
+                                }}
+                                type={"btn-danger"}/>
+                        </div>
+                        <div className={``}>
+                            <ButtonPrimary
+                                onClick={() => {
 
-                                patchPengajuan(detailPengajuan?.data.id ?? 0, dataToSend).then(() => {
-                                    // window.location.reload()
-                                });
+                                    patchPengajuan(detailPengajuan?.data.id ?? 0, dataToSend).then(() => {
+                                    });
 
-                            }}
-                            label={'Terima Pengajuan'}/>
+                                }}
+                                label={'Terima Pengajuan'}/>
+                        </div>
                     </div>
                 </div>
             </div>

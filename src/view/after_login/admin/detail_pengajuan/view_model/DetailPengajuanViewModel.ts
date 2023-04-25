@@ -55,7 +55,10 @@ export const DetailPengajuanViewModel = () => {
     const [terimaPengajuan, setTerimaPengajuan] = useState<ModelTerimaPengajuan>();
     const patchPengajuan = async (id: number, data: ModelTerimaPengajuan) => {
         const resp = await RepositoryTerimaPengajuan(id, data);
-        modal.hide();
+        if (resp !== null) {
+            modal.hide();
+            getDetailData();
+        }
     }
 
     const pengajuanSelesai = async () => {
