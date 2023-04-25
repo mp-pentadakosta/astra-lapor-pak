@@ -10,6 +10,7 @@ import {RepositoryTerimaPengajuan} from "@/repository/admin/terima_pengajuan/Rep
 import {RepositoryProsesAdmin} from "@/repository/admin/proses_admin/RepositoryProsesAdmin";
 import {RepositoryTolakPengajuan} from "@/repository/admin/tolak_pengajuan/RepositoryTolakPengajuan";
 import {router} from "next/client";
+import {ModelSelesaiPengajaun} from "@/view/after_login/admin/detail_pengajuan/model/ModelSelesaiPengajaun";
 
 
 export const DetailPengajuanViewModel = () => {
@@ -21,7 +22,6 @@ export const DetailPengajuanViewModel = () => {
     const getId = () => {
         const splitPath = pathname.split('/');
         const id = splitPath[splitPath.length - 1];
-        console.log('id', id)
         return parseInt(id);
     }
 
@@ -48,7 +48,15 @@ export const DetailPengajuanViewModel = () => {
                     telpon: item.telpon,
                 }
             })
-            setVendor(dataVendor);
+            const dataAdd: ModelVendor = {
+                noVendor: "",
+                namaVendor: "Pilih Vendor",
+                id: 0,
+                pemilikVendor: "",
+                alamat: "",
+                telpon: ""
+            }
+            setVendor(() => [dataAdd, ...dataVendor]);
         }
     };
 
@@ -61,15 +69,20 @@ export const DetailPengajuanViewModel = () => {
         }
     }
 
-    const pengajuanSelesai = async () => {
-        const resp = await RepositoryProsesAdmin(getId());
-        modal.hide();
-        router.reload()
+    const pengajuanSelesai = async (dataSend: ModelSelesaiPengajaun) => {
+        const resp = await RepositoryProsesAdmin(getId(), dataSend);
+        if (resp !== null) {
+            modal.hide();
+            getDetailData();
+        }
     }
 
     const tolakPengajuan = async () => {
         const resp = await RepositoryTolakPengajuan(getId());
-        modal.hide();
+        if (resp !== null) {
+            modal.hide();
+            getDetailData();
+        }
     }
 
     useEffect(() => {

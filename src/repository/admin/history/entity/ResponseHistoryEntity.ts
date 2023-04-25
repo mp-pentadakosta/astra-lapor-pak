@@ -29,6 +29,7 @@ export interface DatumResponseHistoryEntity {
     status: EnumStatus;
     harga: number;
     is_deleted: null;
+    user: UserHistory
     createdAt: Date;
     updatedAt: Date;
 }
@@ -42,6 +43,11 @@ export enum DepartemenResponseHistoryEntity {
 //     Low = "Low",
 //     Normal = "Normal",
 // }
+
+interface UserHistory {
+    nama: string;
+    departemen: string;
+}
 
 export enum StatusResponseHistoryEntity {
     Ditolak = "Ditolak",

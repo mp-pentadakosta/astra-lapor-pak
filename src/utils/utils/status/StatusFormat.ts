@@ -1,23 +1,23 @@
-import { EnumStatus } from "@/utils/enum/status/EnumStatus";
+import {EnumStatus} from "@/utils/enum/status/EnumStatus";
 
 
 interface InterfaceStatusData {
-    title : string;
-    color : string;
-    backgroundColor : string;
+    title: string;
+    color: string;
+    backgroundColor: string;
 }
 
 class StatusFormat {
-    public statusData = ( props : EnumStatus ) : InterfaceStatusData => {
+    public statusData = (props: EnumStatus): InterfaceStatusData => {
         return {
-            title : props === EnumStatus.prosesAdmin ? "Diterima" : props === EnumStatus.diTolak ? "Ditolak" : props === EnumStatus.prosesVendor ? "Dalam Proses" : props === EnumStatus.selesai ? "Selesai" : "Tidak Diketahui",
-            color : props === EnumStatus.verifikasiAdmin ? "white" :
+            title: props === EnumStatus.prosesAdmin ? "Diterima" : props === EnumStatus.diTolak ? "Ditolak" : props === EnumStatus.prosesVendor ? "Dalam Proses" : props === EnumStatus.selesai ? "Selesai" : "Tidak Diketahui",
+            color: props === EnumStatus.verifikasiAdmin ? "white" :
                 props === EnumStatus.prosesVendor ? "white" :
                     props === EnumStatus.diTolak ? "white" :
                         props === EnumStatus.selesai ? "white" :
                             props === EnumStatus.prosesAdmin ? "white" :
                                 "black",
-            backgroundColor : props === EnumStatus.selesai ? "#8bc34a" :
+            backgroundColor: props === EnumStatus.selesai ? "#8bc34a" :
                 props === EnumStatus.diTolak ? "#db3c30" :
                     props === EnumStatus.verifikasiAdmin ? "#03a9f4" :
                         props === EnumStatus.prosesVendor ? "#4caf50" :
@@ -26,7 +26,7 @@ class StatusFormat {
         }
     }
 
-    public getStatus = ( data : string ) : EnumStatus => {
+    public getStatus = (data: string): EnumStatus => {
         return data === "Proses Admin" ? EnumStatus.prosesAdmin :
             data === "Verifikasi Admin" ? EnumStatus.verifikasiAdmin :
                 data === "Ditolak" ? EnumStatus.diTolak :
@@ -34,6 +34,15 @@ class StatusFormat {
                         data === "Selesai" ? EnumStatus.selesai :
                             EnumStatus.undefined;
     }
+
+    public colorStatusDetail = (status: string): string => {
+        return status === "Proses Vendor" ? "bg-info" :
+            status === "Verifikasi Admin" ? "bg-primary" :
+                status === "Ditolak" ? "bg-danger" :
+                    status === "Selesai" ? "bg-success" :
+                        "bg-primary";
+    }
+
 }
 
 export default new StatusFormat();

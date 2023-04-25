@@ -10,6 +10,9 @@ import {InputSelectOption} from "@/application/component/input/InputSelectOption
 import {TextInputPrimary} from "@/application/component/input/TextInputPrimary";
 import {ModelTerimaPengajuan} from "@/view/after_login/admin/detail_pengajuan/model/ModelTerimaPengajuan";
 import {router} from "next/client";
+import StatusFormat from "@/utils/utils/status/StatusFormat";
+import {InputTextArea} from "@/application/component/input/InputTextArea";
+import {ModelSelesaiPengajaun} from "@/view/after_login/admin/detail_pengajuan/model/ModelSelesaiPengajaun";
 
 
 export const DetailPengajuanView = () => {
@@ -39,7 +42,9 @@ export const DetailPengajuanView = () => {
                     </p>
                     <p className="text-fade">
                         <span className="text-dark">Status Pengajuan:</span>
-                        <span className="badge bg-success float-end">{detailPengajuan?.data.status}</span></p>
+                        <span
+                            className={`badge ${StatusFormat.colorStatusDetail(detailPengajuan?.data.status ?? '')} float-end`}>{detailPengajuan?.data.status}</span>
+                    </p>
                     {/*<p className = "text-fade">*/}
                     {/*    <span className = "text-dark">Order ID:</span>*/}
                     {/*    <span className = "float-end">#123456</span></p>*/}
@@ -88,6 +93,11 @@ export const DetailPengajuanView = () => {
                                 <th className="text-dark">Item</th>
                                 <th className="text-dark">Vendor</th>
                                 <th className="text-dark">Harga</th>
+                                {
+                                    detailPengajuan?.data.komentar_selesai !== null ?
+                                        <th className="text-dark">Keterangan</th> :
+                                        null
+                                }
                             </tr>
                             </thead>
                             <tbody>
@@ -100,11 +110,46 @@ export const DetailPengajuanView = () => {
                                 </td>
                                 <td>{detailPengajuan?.data.vendor?.nama_vendor ?? '-'}</td>
                                 <td>{FormatCurrency.numberToReal(detailPengajuan?.data.harga ?? 0)}</td>
+                                {
+                                    detailPengajuan?.data.komentar_selesai !== null ?
+                                        <td>{detailPengajuan?.data.komentar_selesai}</td> : null
+                                }
                             </tr>
 
                             </tbody>
                         </table>
                     </div>
+
+
+                    {
+                        detailPengajuan?.data.vendor !== null ? <div className="table-responsive">
+                            <table className="text-fade table-bordered table mt-4">
+                                <thead>
+                                <tr>
+                                    <th className="text-dark">#</th>
+                                    <th className="text-dark">No Vendor</th>
+                                    <th className="text-dark">Nama Vendor</th>
+                                    <th className="text-dark">Pemilik Vendor</th>
+                                    <th className="text-dark">Telepon</th>
+                                    <th className="text-dark">Alamat</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>{detailPengajuan?.data.vendor?.no_vendor}</td>
+                                    <td>{detailPengajuan?.data.vendor?.nama_vendor}</td>
+                                    <td>{detailPengajuan?.data.vendor?.pemilik_vendor}</td>
+                                    <td>{detailPengajuan?.data.vendor?.telpon}</td>
+                                    <td>{detailPengajuan?.data.vendor?.alamat}</td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div> : null
+                    }
+
+
                     <div style={{
                         marginTop: '20px',
                         marginBottom: '20px',
@@ -141,7 +186,9 @@ export const DetailPengajuanView = () => {
 
                     </div>
                 </div>
+
             </div>
+
 
             <div className="row">
                 <div className="col-sm-6 text-fade">
@@ -167,11 +214,7 @@ export const DetailPengajuanView = () => {
                     </div>
                     <div className={`d-flex justify-content-end`}>
                         <div className={`me-10`}>
-                            <ButtonPrimary label={'Print'}
-                                           type={'btn-info'}
-                                           onClick={() => {
-                                               router.push('javascript:window.print()')
-                                           }}/>
+                            <a href="javascript:window.print()" className={`btn btn-info`}>Print</a>
                         </div>
 
                         {
@@ -315,25 +358,25 @@ export const DetailPengajuanView = () => {
                     <h6>Yakin Tolak Pengajuan ?</h6>
                 </div>
                 <div className={`modal-footer`}>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                    }}>
-                        <ButtonPrimary
-                            label={'Kembali'}
-                            onClick={() => {
-                                modal.hide();
-                            }}
-                            type={"btn-primary"}/>
-                        <ButtonPrimary
-                            type={"btn-danger"}
-                            onClick={() => {
-                                tolakPengajuan().then(() => {
-                                    // // window.location.reload()
-                                });
-                            }}
-                            label={'Tolak Pengajuan'}/>
+                    <div className={`d-flex justify-content-between`}>
+                        <div className={``}>
+                            <ButtonPrimary
+                                label={'Kembali'}
+                                onClick={() => {
+                                    modal.hide();
+                                }}
+                                type={"btn-primary"}/>
+                        </div>
+                        <div className={``}>
+                            <ButtonPrimary
+                                type={"btn-danger"}
+                                onClick={() => {
+                                    tolakPengajuan().then(() => {
+                                        // // window.location.reload()
+                                    });
+                                }}
+                                label={'Tolak Pengajuan'}/>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -341,10 +384,14 @@ export const DetailPengajuanView = () => {
     }
 
     function modalPengajuanSelesai() {
+        let dataSend: ModelSelesaiPengajaun = {
+            bph: '',
+            keterangan: '',
+        };
         return <div className="modal-dialog modal-dialog-centered">
             <div className="modal-content">
                 <div className="modal-header">
-                    <h4 className="modal-title" id="myCenterModalLabel">Pengajaun Selesai</h4>
+                    <h4 className="modal-title" id="myCenterModalLabel">Pengajuan Selesai</h4>
                     <button type="button"
                             className="btn-close"
                             onClick={() => {
@@ -352,28 +399,43 @@ export const DetailPengajuanView = () => {
                             }}></button>
                 </div>
                 <div className="modal-body">
-                    <TextInputPrimary label={'No. BPH'} type={'text'}/>
+                    <TextInputPrimary label={'No. BPH'}
+                                      type={'text'}
+                                      onChange={(event) => {
+                                          dataSend = {
+                                              ...dataSend,
+                                              bph: event.target.value,
+                                          }
+                                      }}/>
+                    <InputTextArea label={'Keterangan'}
+                                   onChange={(event) => {
+                                       dataSend = {
+                                           ...dataSend,
+                                           keterangan: event.target.value,
+                                       }
+                                   }}/>
                 </div>
                 <div className={`modal-footer`}>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                    }}>
-                        <ButtonPrimary
-                            type={"btn-danger"}
-                            onClick={() => {
-                                modal.hide();
-                            }}
-                            label={'Tidak'}/>
-                        <ButtonPrimary
-                            label={'Ya'}
-                            onClick={() => {
-                                pengajuanSelesai().then(() => {
-                                    // window.location.reload()
-                                })
-                            }}
-                            type={"btn-primary"}/>
+                    <div className={`d-flex justify-content-between`}>
+                        <div className={``}>
+                            <ButtonPrimary
+                                type={"btn-danger"}
+                                onClick={() => {
+                                    modal.hide();
+                                }}
+                                label={'Tidak'}/>
+                        </div>
+                        <div className={``}>
+                            <ButtonPrimary
+                                label={'Ya'}
+                                onClick={() => {
+                                    // console.log(dataSend)
+                                    pengajuanSelesai(dataSend).then(() => {
+                                        // window.location.reload()
+                                    })
+                                }}
+                                type={"btn-primary"}/>
+                        </div>
                     </div>
                 </div>
             </div>

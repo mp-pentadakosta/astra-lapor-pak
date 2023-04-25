@@ -155,6 +155,7 @@ export const HistoryPengajuanView = () => {
                             </div>
                         </div>
                         <TableHistoryPengajuan
+                            role={'admin'}
                             loading={loading}
                             listPengajuan={searchData.length > 0 ? searchHistory : history}/>
                         <div className="row">

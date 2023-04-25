@@ -78,6 +78,7 @@ export const HistoryPengajuanUserView = () => {
                             </div>
                         </div>
                         <TableHistoryPengajuan
+                            role={'user'}
                             loading={loading}
                             listPengajuan={searchData.length > 0 ? searchHistory : history}/>
                         <div className="row">
