@@ -2,8 +2,6 @@
 import {FaAngleDoubleDown} from "react-icons/fa";
 import React from "react";
 import {FaPlus} from "react-icons/fa";
-import {ButtonPrimary} from "@/application/component/button/ButtonPrimary";
-import {ModelAddPengajuan} from "@/view/after_login/user/daftar_pengajuan/model/ModelAddPengajuan";
 import {
     DaftarPengajuanUserViewModel
 } from "@/view/after_login/user/daftar_pengajuan/view_model/DaftarPengajuanUserViewModel";
@@ -23,7 +21,6 @@ export const DaftarPengajuanUserView = () => {
         searchDataPengajuan,
         search,
         setSearch,
-        doAddPengajuan,
         getListPengajuan,
         page,
         setPage,
@@ -90,42 +87,4 @@ export const DaftarPengajuanUserView = () => {
         </div>
     </section>
 
-    function modalDataBody(data: ModelAddPengajuan | undefined, loadingAdd: boolean) {
-        let dataToSend = data;
-        return <div className="modal-dialog modal-dialog-centered">
-            <div className="modal-content">
-                <div className="modal-header">
-                    <h4 className="modal-title" id="myCenterModalLabel">Tambah Pengajaun</h4>
-                    <button type="button"
-                            className="btn-close"
-                            onClick={() => {
-                                modal.hide();
-                            }}></button>
-                </div>
-                <div className="modal-body">
-
-                </div>
-                <div className={`modal-footer`}>
-                    <div style={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                    }}>
-                        <ButtonPrimary
-                            label={'Kembali'}
-                            type={"btn-danger"}/>
-                        <ButtonPrimary
-                            onClick={() => {
-                                if (!loadingAdd) {
-                                    doAddPengajuan(dataToSend).then(() => {
-                                        // window.location.reload()
-                                    });
-                                }
-                            }}
-                            label={loadingAdd ? "Sedang Menyimpan" : 'Simpan'}/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    }
 }

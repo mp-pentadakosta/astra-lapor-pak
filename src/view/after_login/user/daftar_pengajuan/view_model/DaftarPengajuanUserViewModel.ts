@@ -64,31 +64,6 @@ export const DaftarPengajuanUserViewModel = () => {
         setSearchPengajuan(data);
     }
 
-    const doAddPengajuan = async (dataToSend: ModelAddPengajuan | undefined) => {
-        const lengthFoto = dataToSend?.foto?.length ?? 0;
-        console.debug('dataToSend', dataToSend?.prioritas)
-        if (dataToSend?.deskripsi !== '' && lengthFoto > 0 && dataToSend?.namaPengajuan !== '' && dataToSend?.prioritas !== '') {
-            if (dataToSend?.prioritas !== undefined) {
-                setLoadingAdd(true)
-                await RepositoryAddPengajuan(dataToSend ?? {
-                    prioritas: '',
-                    namaPengajuan: '',
-                    deskripsi: '',
-                    foto: []
-                }).then(() => {
-                    route.replace(path);
-                });
-                modal.hide();
-            } else {
-                alert('Prioritas tidak boleh kosong')
-            }
-
-        } else {
-            alert('Data tidak boleh kosong');
-        }
-        setLoadingAdd(false)
-    }
-
 
     useEffect(() => {
         getListPengajuan(0, 10);
@@ -104,7 +79,6 @@ export const DaftarPengajuanUserViewModel = () => {
         searchDataPengajuan,
         search, setSearch,
         addPengajuan, setAddPengajaun,
-        doAddPengajuan,
         getListPengajuan,
         page, setPage, modal,
         loadingAdd
