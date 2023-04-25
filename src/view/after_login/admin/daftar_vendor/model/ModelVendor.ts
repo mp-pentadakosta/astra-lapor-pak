@@ -1,7 +1,8 @@
 export interface ModelVendor {
-    id : number;
-    namaVendor : string;
-    pemilikVendor : string;
-    alamat : string;
-    telpon : string;
+    id: number;
+    noVendor: string;
+    namaVendor: string;
+    pemilikVendor: string;
+    alamat: string;
+    telpon: string;
 }
