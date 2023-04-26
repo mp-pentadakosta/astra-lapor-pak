@@ -3,5 +3,6 @@ export interface ModelLayout {
     role : string;
     departement : string;
     email : string;
+    foto : string;
     route? : string;
 }

@@ -98,7 +98,7 @@ export const HeaderLayout = () => {
                                         <p className = "pt-5 fs-14 mb-0 fw-700">{ header?.name }</p>
                                         <small className = "fs-10 mb-0 text-uppercase text-mute">{ header?.departement }</small>
                                     </div>
-                                    <img src = "/images/avatar/avatar-13.png"
+                                    <img src = { header?.foto }
                                          className = "avatar rounded-circle bg-primary-light h-40 w-40"
                                          alt = ""/>
                                 </div>

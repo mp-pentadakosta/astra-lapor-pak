@@ -54,6 +54,9 @@ export const LoginViewModel = () => {
                 await setCookie( "token", resp.data.token, {
                     expires : new Date( Date.now() + 24 * 60 * 60 * 1000 ),
                 } );
+                await setCookie( "foto", resp.data.foto, {
+                    expires : new Date( Date.now() + 24 * 60 * 60 * 1000 ),
+                } );
                 await setCookie( "role", resp.data.roles, {
                     expires : new Date( Date.now() + 24 * 60 * 60 * 1000 ),
                 } );

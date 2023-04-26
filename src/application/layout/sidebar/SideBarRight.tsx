@@ -1,7 +1,9 @@
+"use client";
 import { FaSignOutAlt } from "react-icons/fa";
 import { ModelLayout } from "@/application/layout/model/ModelLayout";
 import { useRouter } from "next/navigation";
-import { deleteCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
+import { useEffect, useState } from "react";
 
 
 interface InterfaceSideBarRight {
@@ -11,6 +13,8 @@ interface InterfaceSideBarRight {
 
 export const SideBarRight = ( props : InterfaceSideBarRight ) => {
     const route = useRouter()
+
+
     return <div className = "modal modal-right fade show"
                 tabIndex = { -1 }
                 style = { {
@@ -30,9 +34,9 @@ export const SideBarRight = ( props : InterfaceSideBarRight ) => {
                     <div>
                         <div className = "d-flex flex-row">
                             <div className = "">
-                                <img src = "/images/avatar/avatar-13.png"
+                                <img src = { props.dataHeader?.foto }
                                      alt = "user"
-                                     className = "rounded bg-danger-light w-150"
+                                     className = "rounded bg-primary w-150"
                                      width = { 100 }/>
                             </div>
                             <div className = "ps-20">
