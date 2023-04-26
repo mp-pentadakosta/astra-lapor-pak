@@ -4,5 +4,6 @@ export enum EnumTipeDashboard {
     totalDitijau = "pengajuan ditinjau",
     tolak = "ditolak",
     selesai = "selesai",
+    vendor = "vendor",
 
 }

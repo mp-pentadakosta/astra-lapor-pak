@@ -4,14 +4,10 @@ import { DaftarPengajuanRepository } from "@/repository/admin/daftar_pengajuan_r
 import {
     DatumResponsePengajuanEntity
 } from "@/repository/admin/daftar_pengajuan_repository/entity/ResponsePengajuanEntity";
-import { EnumStatus } from "@/utils/enum/status/EnumStatus";
 import FormatDate from "@/utils/utils/format_date/FormatDate";
 import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
 import { ModelSelectOption } from "@/application/component/input/model/ModelSelectOption";
 import StatusFormat from "@/utils/utils/status/StatusFormat";
-import {
-    DaftarPengajuanUserRepository
-} from "@/repository/user/daftar_pengajuan_repository/DaftarPengajuanUserRepository";
 import { ModelDaftarPengajuanUser } from "@/view/after_login/user/daftar_pengajuan/model/ModelDaftarPengajuanUser";
 
 

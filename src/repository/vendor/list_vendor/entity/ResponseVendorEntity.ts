@@ -20,11 +20,11 @@ export interface DatumResponseVendorEntity {
     is_deleted : null;
     createdAt : string;
     updatedAt : string;
-    countAll : number;
-    countPoor : number;
-    countVeryPoor : number;
-    countGood : number;
-    countVeryGood : number;
+    countAll : number | null;
+    countPoor : number | null;
+    countVeryPoor : number | null;
+    countGood : number | null;
+    countVeryGood : number | null;
 }
 
 // Converts JSON strings to/from your types

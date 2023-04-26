@@ -18,7 +18,11 @@ export const DaftarVendorView = () => {
         searchVendor,
         setSearch,
         search,
-        loading
+        loading,
+        getDataVendor,
+        setYear,
+        year,
+        downloadFileVendor,
     } = DaftarVendorViewModel()
 
     const route = useRouter()
@@ -55,11 +59,33 @@ export const DaftarVendorView = () => {
                         <div>
                             <div className = "row">
                                 <div className = "col-12 col-md-6">
-                                    <div className = { `` }>
-                                        <TextInputPrimary label = { 'Tahun' }
-                                                          type = { 'number' }
-                                                          placeholder = { 'Tahun' }/>
-                                        <ButtonPrimary label = { 'Cari' }/>
+                                    <TextInputPrimary label = { 'Tahun' }
+                                                      type = { 'number' }
+                                                      defaultValue = {
+                                                          year.toString() === "0" ? new Date().getFullYear().toString() : year.toString()
+                                                      }
+                                                      onChange = { ( event ) => {
+                                                          setYear( event.target.value )
+                                                      } }
+                                                      placeholder = { 'Tahun' }/>
+                                    <div style = { {
+                                        display : 'flex',
+                                    } }>
+                                        <div className = { `me-10` }>
+                                            <ButtonPrimary label = { 'Download' }
+                                                           type = { 'btn-info' }
+                                                           onClick = { () => {
+                                                               downloadFileVendor()
+                                                           } }/>
+
+                                        </div>
+                                        <div className = { `` }>
+                                            <ButtonPrimary label = { 'Cari' }
+                                                           onClick = { () => {
+                                                               getDataVendor( year.toString() )
+                                                           } }/>
+
+                                        </div>
                                     </div>
                                     <div className = "form-group mt-20">
                                         <input type = "text"
@@ -69,7 +95,7 @@ export const DaftarVendorView = () => {
                                                    setSearch( event.target.value );
                                                    getSearchVendor( event.target.value )
                                                } }
-                                               placeholder = "Cari..."/>
+                                               placeholder = "Cari nama vendor..."/>
                                     </div>
                                 </div>
                             </div>
