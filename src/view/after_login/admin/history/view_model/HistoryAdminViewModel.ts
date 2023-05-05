@@ -58,15 +58,6 @@ export const HistoryAdminViewModel = () => {
         }
         setLoadingExcel( false )
 
-        // let headerOfHistory : string[] = []
-        // for ( const settingsKey in history ) {
-        //     if ( history.hasOwnProperty( settingsKey ) ) {
-        //         const element = history[ settingsKey ];
-        //         headerOfHistory.push( settingsKey )
-        //     }
-        // }
-
-
         let data = [
             {
                 sheet : "Adults",
