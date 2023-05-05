@@ -42,6 +42,7 @@ export const SideBarViewModel = () => {
             departement : departemen as string,
             name : nama as string,
             role : role as string,
+            foto : '',
             route : role === 'admin' ? '/admin' : role === 'user' ? '/user' : role === 'atasan' ? '/atasan' : '/'
         } );
 

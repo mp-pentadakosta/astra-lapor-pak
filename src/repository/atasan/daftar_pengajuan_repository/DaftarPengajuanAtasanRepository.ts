@@ -5,8 +5,8 @@ import {
 } from "@/repository/admin/daftar_pengajuan_repository/entity/ResponsePengajuanEntity";
 
 
-export const DaftarPengajuanAtasanRepository = async () : Promise<ResponsePengajuanEntity | null> => {
-    const resp = await Api.get( '/atasan/pengajuan' )
+export const DaftarPengajuanAtasanRepository = async ( page : number ) : Promise<ResponsePengajuanEntity | null> => {
+    const resp = await Api.get( '/atasan/pengajuan?limit=10&page=' + page )
     if ( resp !== null ) {
         return ConvertResponsePengajuanEntity.toResponsePengajuanEntity( resp )
     }

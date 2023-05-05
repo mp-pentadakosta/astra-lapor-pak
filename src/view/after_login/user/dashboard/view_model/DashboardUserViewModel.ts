@@ -57,15 +57,15 @@ export const DashboardUserViewModel = () => {
     }
 
     const getPengjuanDiterima = async () => {
-        const resp = await DashboardAdminRepository( "user", EnumTipeDashboard.vendor )
-        if ( resp !== null ) {
-            setDashboard( ( prevState ) => {
-                return {
-                    ...prevState,
-                    totalVendor : resp.data.jumlah.toString(),
-                } as ModelDashboardAdmin
-            } )
-        }
+        // const resp = await DashboardAdminRepository( "user", EnumTipeDashboard.vendor )
+        // if ( resp !== null ) {
+        //     setDashboard( ( prevState ) => {
+        //         return {
+        //             ...prevState,
+        //             totalVendor : resp.data.jumlah.toString(),
+        //         } as ModelDashboardAdmin
+        //     } )
+        // }
     }
 
     useEffect( () => {

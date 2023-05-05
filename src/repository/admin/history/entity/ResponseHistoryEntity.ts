@@ -27,33 +27,29 @@ export interface DatumResponseHistoryEntity {
     komentar : null | string;
     prioritas : EnumPrioritas;
     status : EnumStatus;
-    harga : number;
+    rating : string | null;
+    harga : number | null;
     is_deleted : null;
     user : UserHistory
+    vendor : InterfaceVendorHistory | null;
     createdAt : Date;
     updatedAt : Date;
 }
-
-export enum DepartemenResponseHistoryEntity {
-    PartDept = "Part Dept",
-}
-
-// export enum EnumPrioritas {
-//     High = "High",
-//     Low = "Low",
-//     Normal = "Normal",
-// }
 
 interface UserHistory {
     nama : string;
     departemen : string;
 }
 
-export enum StatusResponseHistoryEntity {
-    Ditolak = "Ditolak",
-    ProsesAdmin = "Proses Admin",
-    Selesai = "Selesai",
-    VerifikasiAdmin = "Verifikasi Admin",
+interface InterfaceVendorHistory {
+    alamat : string;
+    createdAt : string;
+    id : number;
+    is_deleted : string | null;
+    nama_vendor : string;
+    pemilik_vendor : string;
+    telpon : string
+    updatedAt : string;
 }
 
 // Converts JSON strings to/from your types

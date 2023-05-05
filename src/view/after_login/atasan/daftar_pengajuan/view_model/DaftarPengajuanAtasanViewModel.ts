@@ -3,7 +3,6 @@ import { ModelDaftarPenhajuan } from "@/view/after_login/admin/daftar_pengajuan/
 import {
     DatumResponsePengajuanEntity
 } from "@/repository/admin/daftar_pengajuan_repository/entity/ResponsePengajuanEntity";
-import { EnumStatus } from "@/utils/enum/status/EnumStatus";
 import FormatDate from "@/utils/utils/format_date/FormatDate";
 import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
 import {
@@ -22,12 +21,13 @@ export const DaftarPengajuanAtasanViewModel = () => {
 
     const [ searchPengajuan, setSearchPengajuan ] = useState<ModelDaftarPenhajuan[]>( [] );
 
-    const getListPengajuan = async () => {
+    const [ page, setPage ] = useState( 0 );
+
+    const getListPengajuan = async ( pageData : number ) => {
         setLoading( true );
-        const response = await DaftarPengajuanAtasanRepository()
+        const response = await DaftarPengajuanAtasanRepository( pageData )
         if ( response !== null ) {
             const dataList : ModelDaftarPenhajuan[] = response.data.map( ( item : DatumResponsePengajuanEntity ) => {
-                const status = item.status ?? '';
                 return {
                     id : item.id,//item.id ?? 0,
                     namaBarang : item.pengajuan_name ?? '',
@@ -38,7 +38,13 @@ export const DaftarPengajuanAtasanViewModel = () => {
                     status : StatusFormat.getStatus( item.status ?? '' ),
                 }
             } );
-            setListPengajuan( dataList );
+            // console.log( 'dataList', dataList )
+            setListPengajuan( ( prevState ) =>
+                [
+                    ...prevState,
+                    ...dataList
+                ]
+            );
         }
         setLoading( false );
     }
@@ -51,7 +57,7 @@ export const DaftarPengajuanAtasanViewModel = () => {
     }
 
     useEffect( () => {
-        getListPengajuan();
+        getListPengajuan( page );
         return () => {
         };
     }, [] );
@@ -63,5 +69,8 @@ export const DaftarPengajuanAtasanViewModel = () => {
         searchPengajuan,
         searchDataPengajuan,
         search, setSearch,
+        setPage,
+        page,
+        getListPengajuan
     }
 }

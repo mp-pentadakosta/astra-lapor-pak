@@ -21,6 +21,7 @@ export const TambahPengajuanUserView = () => {
         listPrioritas,
         getValues,
         submitPengajuan,
+        loading,
     } = TambahPengajuanUserViewModel();
 
     return <section className = "content">
@@ -85,7 +86,7 @@ export const TambahPengajuanUserView = () => {
                                     <div className = { `` }>
                                         <ButtonPrimary
                                             data = { 'submit' }
-                                            label = { 'Simpan' }/>
+                                            label = { loading ? 'Tunggu Sebentar' : 'Simpan' }/>
                                     </div>
                                 </div>
                             </div>

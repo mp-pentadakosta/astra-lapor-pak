@@ -6,6 +6,7 @@ import React from "react";
 export const ErrorResponse = ( data : string ) => {
     // window.location.reload()
     toast.error( data, {
+        autoClose : 5000,
         style : {
             background : "#f44336",
             color : "#ffffff",
@@ -19,6 +20,7 @@ export const ErrorResponse = ( data : string ) => {
 export const ErrorSuccess = ( data : string ) => {
     // window.location.reload()
     toast.success( data, {
+        autoClose : 5000,
         style : {
             background : "#4caf50",
             color : "#ffffff",

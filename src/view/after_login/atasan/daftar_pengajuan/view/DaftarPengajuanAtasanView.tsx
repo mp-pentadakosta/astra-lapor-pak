@@ -15,6 +15,9 @@ export const DaftarPengajuanAtasanView = () => {
         searchDataPengajuan,
         search,
         setSearch,
+        getListPengajuan,
+        page,
+        setPage
     } = DaftarPengajuanAtasanViewModel();
 
 
@@ -52,6 +55,10 @@ export const DaftarPengajuanAtasanView = () => {
                             <div className = "col-12 text-center">
                                 <button type = "button"
                                         className = "btn btn-info-light ajax"
+                                        onClick = { () => {
+                                            setPage( page + 1 );
+                                            getListPengajuan( page + 1 );
+                                        } }
                                         title = "">
                                     <FaAngleDoubleDown style = { {
                                         marginRight : "5px"
