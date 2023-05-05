@@ -8,6 +8,11 @@ class FormatDate {
         return dateLocale.toLocaleDateString();
     }
 
+    public reverseStringDate( date : string ) : string {
+        return date.split( '-' ).reverse().join( '-' );
+        // return `${ splitDate[ 2 ] }-${ splitDate[ 1 ] }-${ splitDate[ 0 ] }`;
+    }
+
     public dateStringToSend( date : string ) : string {
         const dateLocale = new Date( date );
         const year = dateLocale.getFullYear();
