@@ -25,7 +25,7 @@ export const DetailPengajuanView = () => {
         tolakPengajuan,
     } = DetailPengajuanViewModel()
     return <section className = "invoice printableArea" style = { {} }>
-        <div className = "row">
+        <div className = "row" style = { {} }>
             <div className = "col-sm-6">
                 <div className = "float-start mt-3">
                     <h5 className = "text-dark">{ detailPengajuan?.data.pengajuan_name }</h5>
@@ -188,7 +188,6 @@ export const DetailPengajuanView = () => {
                 </div>
 
             </div>
-
 
             <div className = "row">
                 <div className = "col-sm-6 text-fade">
