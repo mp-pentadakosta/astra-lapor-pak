@@ -55,7 +55,7 @@ export const DetailPengajuanView = () => {
                 <div className = "col-sm-4 text-fade">
                     <h6 className = "text-dark">Nama Pemohon</h6>
                     <div>
-                        { detailPengajuan?.data.pengajuan_name }<br/>
+                        { detailPengajuan?.data.user.nama }<br/>
                         { detailPengajuan?.data.departemen }<br/>
                         {/*<abbr title = "Phone">P:</abbr> (123) 456-7890*/ }
                     </div>
