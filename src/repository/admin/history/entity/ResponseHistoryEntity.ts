@@ -6,6 +6,7 @@
 
 import { EnumPrioritas } from "@/utils/enum/prioritas/EnumPrioritas";
 import { EnumStatus } from "@/utils/enum/status/EnumStatus";
+import { EnumRating } from "@/utils/enum/rating/EnumRating";
 
 
 export interface ResponseHistoryEntity {
@@ -27,7 +28,7 @@ export interface DatumResponseHistoryEntity {
     komentar : null | string;
     prioritas : EnumPrioritas;
     status : EnumStatus;
-    rating : string | null;
+    rating : EnumRating | null;
     harga : number | null;
     is_deleted : null;
     user : UserHistory
