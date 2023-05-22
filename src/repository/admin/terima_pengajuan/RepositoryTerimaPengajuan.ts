@@ -7,7 +7,7 @@ export const RepositoryTerimaPengajuan = async ( id : number, data : ModelTerima
         vendor_id : data.vendorId,
         tanggal_mulai : data.tanggalMulai,
         tanggal_selesai : data.tanggalSelesai,
-        harga : data.harga,
+        // harga : data.harga,
         tipe : data.tipe,
     } );
     if ( resp !== null ) {

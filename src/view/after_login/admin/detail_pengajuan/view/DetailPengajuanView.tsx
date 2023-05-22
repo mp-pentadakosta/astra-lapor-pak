@@ -9,7 +9,6 @@ import React from "react";
 import { InputSelectOption } from "@/application/component/input/InputSelectOption";
 import { TextInputPrimary } from "@/application/component/input/TextInputPrimary";
 import { ModelTerimaPengajuan } from "@/view/after_login/admin/detail_pengajuan/model/ModelTerimaPengajuan";
-import { router } from "next/client";
 import StatusFormat from "@/utils/utils/status/StatusFormat";
 import { InputTextArea } from "@/application/component/input/InputTextArea";
 import { ModelSelesaiPengajaun } from "@/view/after_login/admin/detail_pengajuan/model/ModelSelesaiPengajaun";
@@ -246,7 +245,7 @@ export const DetailPengajuanView = () => {
             vendorId : 0,
             tanggalSelesai : '',
             tanggalMulai : '',
-            harga : 0,
+            // harga : 0,
         }
         return <div className = "modal-dialog modal-dialog-centered">
             <div className = "modal-content">
@@ -292,14 +291,6 @@ export const DetailPengajuanView = () => {
                         </div>
 
                     </div>
-                    <TextInputPrimary label = { 'Harga' }
-                                      type = { 'text' }
-                                      onChange = { ( event ) => {
-                                          dataToSend = {
-                                              ...dataToSend,
-                                              harga : parseInt( event.target.value ),
-                                          } as ModelTerimaPengajuan
-                                      } }/>
                     <InputSelectOption label = { 'Pilih Vendor' }
                                        selected = { ( data ) => {
                                            dataToSend = {
@@ -384,6 +375,7 @@ export const DetailPengajuanView = () => {
 
     function modalPengajuanSelesai() {
         let dataSend : ModelSelesaiPengajaun = {
+            harga : 0,
             bph : '',
             keterangan : '',
         };
@@ -404,6 +396,14 @@ export const DetailPengajuanView = () => {
                                           dataSend = {
                                               ...dataSend,
                                               bph : event.target.value,
+                                          }
+                                      } }/>
+                    <TextInputPrimary label = { 'Biaya Perbaikan' }
+                                      type = { 'text' }
+                                      onChange = { ( event ) => {
+                                          dataSend = {
+                                              ...dataSend,
+                                              harga : parseInt( event.target.value ),
                                           }
                                       } }/>
                     <InputTextArea label = { 'Keterangan' }

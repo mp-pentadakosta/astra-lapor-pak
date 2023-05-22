@@ -3,5 +3,5 @@ export interface ModelTerimaPengajuan {
     vendorId? : number;
     tanggalMulai? : string;
     tanggalSelesai? : string;
-    harga? : number;
+    // harga? : number;
 }

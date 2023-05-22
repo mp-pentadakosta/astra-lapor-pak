@@ -100,19 +100,22 @@ export const DaftarVendorView = () => {
                                 </div>
                             </div>
                         </div>
-                        <TableVendor
-                            loading = { loading }
-                            listPengajuan = { search.length > 0 ? searchVendor : vendor }
-                            seeVendor = { ( data ) => {
-                                route.push( '/admin/detail-vendor/' + data.id )
-                            } }
-                            editVendor = { ( data ) => {
-                                route.push( '/admin/edit-daftar-vendor/' + data.id )
-                            } }
-                            deleteVendor = { ( data ) => {
-                                modal.show();
-                                modal.body( modalDelete( data.id ) );
-                            } }/>
+
+                        <div className = { `max-h-500 overflow-auto` }>
+                            <TableVendor
+                                loading = { loading }
+                                listPengajuan = { search.length > 0 ? searchVendor : vendor }
+                                seeVendor = { ( data ) => {
+                                    route.push( '/admin/detail-vendor/' + data.id )
+                                } }
+                                editVendor = { ( data ) => {
+                                    route.push( '/admin/edit-daftar-vendor/' + data.id )
+                                } }
+                                deleteVendor = { ( data ) => {
+                                    modal.show();
+                                    modal.body( modalDelete( data.id ) );
+                                } }/>
+                        </div>
                     </div>
                 </div>
             </div>
