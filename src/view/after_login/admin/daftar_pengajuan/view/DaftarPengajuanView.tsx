@@ -84,7 +84,7 @@ export const DaftarPengajuanView = () => {
                                                                        full
                                                                        data = { 'button' }
                                                                        onClick = { () => {
-                                                                           getListPengajuanFilter( page, 10 );
+                                                                           getListPengajuanFilter( 0, 10 );
                                                                            // getHistory( date.startDate, date.endDate )
                                                                        } }/>
                                                     </div>
