@@ -5,6 +5,8 @@ import {
 import {FaAngleDoubleDown} from "react-icons/fa";
 import React from "react";
 import {TableDaftarPengajaun} from "@/utils/component/table/TableDaftarPengajaun";
+import { TextInputPrimary } from "@/application/component/input/TextInputPrimary";
+import { ButtonPrimary } from "@/application/component/button/ButtonPrimary";
 
 
 export const DaftarPengajuanView = () => {
@@ -17,7 +19,12 @@ export const DaftarPengajuanView = () => {
         setSearch,
         setPage,
         page,
-        getListPengajuan
+        getListPengajuan,
+        setDate,
+        getListPengajuanFilter,
+        downloadExcel,
+        loadingExcel,
+        date
     } = DaftarPengajuanViewModel();
 
 
@@ -32,6 +39,61 @@ export const DaftarPengajuanView = () => {
                     </div>
                     <div className="card-body">
                         <div>
+                            <div className = "row">
+                                <div className = "col-12">
+                                    <div className = "form-group">
+                                        <div className = { `row` }>
+                                            <div className = { `col-6 col-md-6` }>
+                                                <TextInputPrimary label = { 'Start Date' }
+                                                                  type = { 'date' }
+                                                                  onChange = { ( event ) => {
+                                                                      setDate( ( prevState ) => {
+                                                                          return {
+                                                                              ...prevState,
+                                                                              startDate : event.target.value ?? ''
+                                                                          }
+                                                                      } )
+                                                                  } }/>
+                                            </div>
+                                            <div className = { `col-6 col-md-6` }>
+                                                <TextInputPrimary label = { 'End Date' }
+                                                                  type = { 'date' }
+                                                                  onChange = { ( event ) => {
+                                                                      setDate( ( prevState ) => {
+                                                                          return {
+                                                                              ...prevState,
+                                                                              endDate : event.target.value ?? ''
+                                                                          }
+                                                                      } )
+                                                                  } }/>
+                                            </div>
+                                            <div className = { `col-12` }>
+                                                <div className = { `row` }>
+                                                    <div className = { `col-12 col-md-6` }>
+                                                        <ButtonPrimary label = { loadingExcel ? "Mohon Tunggu" : 'Download Excel' }
+                                                                       full
+                                                                       data = { 'button' }
+                                                                       type = { 'btn-info' }
+                                                                       onClick = { () => {
+                                                                           if ( loadingExcel ) return;
+                                                                           downloadExcel( date.startDate, date.endDate )
+                                                                       } }/>
+                                                    </div>
+                                                    <div className = { `col-12 col-md-6` }>
+                                                        <ButtonPrimary label = { 'Cari' }
+                                                                       full
+                                                                       data = { 'button' }
+                                                                       onClick = { () => {
+                                                                           getListPengajuanFilter( page, 10 );
+                                                                           // getHistory( date.startDate, date.endDate )
+                                                                       } }/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div className="row">
                                 <div className="col-12 col-md-6">
                                     <div className="form-group">

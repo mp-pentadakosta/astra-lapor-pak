@@ -16,8 +16,8 @@ export interface DatumResponsePengajuanEntity {
     vendor_id : null;
     pengajuan_name : string;
     tanggal_pengajuan : string;
-    tanggal_mulai : Date;
-    tanggal_selesai : Date;
+    tanggal_mulai : string;
+    tanggal_selesai : string;
     deskripsi : string;
     komentar : null;
     prioritas : string;
