@@ -48,7 +48,7 @@ export const ComponentView = () => {
                                 <div className = { `row` }>
                                     <div className = { `col-12 col-xl-6` }>
                                         <button type = "button" className = "btn btn-secondary" onClick = { () => {
-                                            modal.show( true );
+                                            modal.show();
                                         } }>Modal
                                         </button>
                                     </div>

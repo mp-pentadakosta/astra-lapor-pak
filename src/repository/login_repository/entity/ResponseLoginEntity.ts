@@ -17,6 +17,7 @@ export interface DataResponseLoginEntity {
     nama : string;
     departemen : string;
     roles : string;
+    foto : string
 }
 
 // Converts JSON strings to/from your types

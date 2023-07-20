@@ -12,12 +12,14 @@ export const HeaderViewModel = () => {
         const email = await getCookie( "email" )
         const departemen = await getCookie( "departemen" )
         const nama = await getCookie( "nama" )
+        const foto = await getCookie( "foto" )
 
         setHeader( {
             email : email as string,
             departement : departemen as string,
             name : nama as string,
             role : role as string,
+            foto : foto as string,
             route : role === 'admin' ? '/admin' : role === 'user' ? '/user' : role === 'atasan' ? '/atasan' : '/'
         } );
     }

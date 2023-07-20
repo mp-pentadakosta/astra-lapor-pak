@@ -1,7 +1,8 @@
 export enum EnumStatus {
-    diTerima = "Diterima",
+    prosesAdmin = "Proses Admin",
+    verifikasiAdmin = "Verifikasi Admin",
     diTolak = "Ditolak",
-    dalamProses = "Dalam Proses",
+    prosesVendor = "Proses Vendor",
     selesai = "Selesai",
     undefined = "Undefined"
 }

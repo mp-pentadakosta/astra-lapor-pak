@@ -3,14 +3,17 @@
 
 import Head from "next/head";
 
-import "../../public/src/css/vendors_css.css"
-import "../../public/src/css/style.css"
-import "../../public/src/css/skin_color.css"
+import "../../../public/src/css/vendors_css.css"
+import "../../../public/src/css/style.css"
+import "../../../public/src/css/skin_color.css"
 import Script from "next/script";
 import { HeaderLayout } from "@/application/layout/header/HeaderLayout";
 import { SideBarLayout } from "@/application/layout/sidebar/SideBarLayout";
-import { ModalData } from "@/application/component/modal/ModalContext";
 import { ToastData } from "@/application/component/alert/ToastData";
+import { ModalData } from "@/application/component/modal/ModalContext";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function RootLayout( {
@@ -32,11 +35,18 @@ export default function RootLayout( {
         <body className = "hold-transition light-skin sidebar-mini theme-primary fixed">
 
 
-        <div className = "wrapper">
-            <HeaderLayout/>
-            <SideBarLayout/>
-            { children }
-        </div>
+        <ModalData>
+            <ToastContainer
+                autoClose = { false }
+                closeOnClick = { true }/>
+            <ToastData>
+                <div className = "wrapper">
+                    <HeaderLayout/>
+                    <SideBarLayout/>
+                    { children }
+                </div>
+            </ToastData>
+        </ModalData>
 
 
         </body>

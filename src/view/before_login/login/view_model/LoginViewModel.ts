@@ -50,7 +50,11 @@ export const LoginViewModel = () => {
                 password : login.password,
             } );
             if ( resp !== null ) {
+                console.log( resp.data.token )
                 await setCookie( "token", resp.data.token, {
+                    expires : new Date( Date.now() + 24 * 60 * 60 * 1000 ),
+                } );
+                await setCookie( "foto", resp.data.foto, {
                     expires : new Date( Date.now() + 24 * 60 * 60 * 1000 ),
                 } );
                 await setCookie( "role", resp.data.roles, {

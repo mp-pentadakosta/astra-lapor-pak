@@ -65,7 +65,7 @@ export const LoginView = () => {
                                                 className = "btn btn-primary w-p100 mt-10">
                                             {
                                                 loading ?
-                                                    "Tunggu Sebentar" :
+                                                    "Tunggu Sebentar..." :
                                                     "SIGN IN"
                                             }
                                         </button>

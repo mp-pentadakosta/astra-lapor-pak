@@ -1,25 +1,40 @@
 import { StatusCardStyle } from "@/utils/component/status/StatusCardStyle";
-import Link from "next/link";
 import { ModelDaftarPenhajuan } from "@/view/after_login/admin/daftar_pengajuan/model/ModelDaftarPenhajuan";
 import React from "react";
 import { PriorotasCardStyle } from "@/utils/component/prioritas/PriorotasCardStyle";
-import { FaBuffer } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import useWindowSize from "@rooks/use-window-size";
 
 
 interface InterfaceTableDaftarPengajaun {
+    role : string
     loading : boolean
     listPengajuan : ModelDaftarPenhajuan[]
 }
 
 export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) => {
+    const route = useRouter()
+    const size = useWindowSize();
+
+    let sizeWidth = size.innerWidth ?? 1000;
     return <>
-        <div className = { `table-responsive` }>
+        <div className = { `table-responsive` } style = { {
+            maxHeight : sizeWidth > 768 ? "500px" : "300px",
+        } }>
             <table className = "table">
-                <thead>
+                <thead style = { {
+                    backgroundColor : "#f5f5f5",
+                    position : "sticky",
+                    top : "0",
+                } }>
                 <tr>
                     <th style = { {
+                        width : "5%",
+                    } }>No.
+                    </th>
+                    <th style = { {
                         width : "15%",
-                    } }>Nama Barang
+                    } }>Nama Pengajuan
                     </th>
                     <th style = { {
                         width : "15%",
@@ -38,19 +53,32 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
                     } }>Prioritas
                     </th>
                     <th style = { {
-                        width : "10%",
+                        width : "20%",
                     } }>Status
-                    </th>
-                    <th style = { {
-                        width : "10%",
-                    } }>Actions
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 {
                     props.listPengajuan.map( ( item, index ) => {
-                        return <tr key = { index }>
+                        return <tr key = { index }
+                                   className = { `hover hover-success` }
+                                   onClick = { () => {
+                                       // `/admin/daftar-pengajuan/` + item.id
+                                       if ( props.role === 'admin' ) {
+                                           route.push( `/admin/daftar-pengajuan/` + item.id )
+                                       }
+                                       if ( props.role === 'user' ) {
+                                           route.push( `/user/daftar-pengajuan/` + item.id )
+                                       }
+                                       if ( props.role === 'atasan' ) {
+                                           route.push( `/atasan/daftar-pengajuan/` + item.id )
+                                       }
+                                   } }
+                                   style = { {
+                                       cursor : 'pointer',
+                                   } }>
+                            <td>{ index + 1 }</td>
                             <td>{ item.namaBarang }</td>
                             <td>{ item.namaPemohon }</td>
                             <td>{ item.departemen }</td>
@@ -69,12 +97,6 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
                                     <StatusCardStyle data = { item.status }/>
                                 </div>
                             </td>
-                            <td className = "table-action min-w-100">
-                                <Link href = { `/admin/daftar-pengajuan/` + item.id }
-                                      className = "text-fade hover-primary">
-                                    <FaBuffer size = { 25 }/>
-                                </Link>
-                            </td>
                         </tr>
                     } )
                 }
@@ -89,7 +111,7 @@ export const TableDaftarPengajaun = ( props : InterfaceTableDaftarPengajaun ) =>
                 marginTop : "20px",
                 marginBlock : "20px",
             } }>
-                Tutunggu sebentar...
+                Tunggu sebentar...
             </div> : (
                 props.listPengajuan.length === 0 ? <div style = { {
                     display : "flex",

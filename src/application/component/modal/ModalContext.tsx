@@ -3,7 +3,11 @@ import React, { useState } from "react";
 
 
 export interface InterfaceModal {
-    show : ( value : boolean ) => void
+    show : () => void
+    hide : () => void
+    body : ( value : React.ReactNode ) => void
+    // dataPengajuan : ( data : ModelAddPengajuan ) => void
+    // dataValue : ModelAddPengajuan | undefined
 }
 
 export const ModalContext = React.createContext <InterfaceModal>( {} as InterfaceModal );
@@ -14,8 +18,14 @@ interface InterfaceModalData {
 
 export const ModalData = ( props : InterfaceModalData ) => {
     const [ show, setShow ] = useState( false );
+    const [ modalBody, setModalBody ] = useState<React.ReactNode>( <div></div> );
+    // const [ pengajuan, setPengajuan ] = useState<ModelAddPengajuan>();
     return <ModalContext.Provider value = { {
-        show : ( value : boolean ) => setShow( value )
+        show : () => setShow( true ),
+        hide : () => setShow( false ),
+        body : ( value : React.ReactNode ) => setModalBody( value ),
+        // dataPengajuan : ( data : ModelAddPengajuan ) => setPengajuan( data ),
+        // dataValue : pengajuan
     } }>
         {
             show && modal()
@@ -33,26 +43,9 @@ export const ModalData = ( props : InterfaceModalData ) => {
             zIndex : 9999,
             backgroundColor : "rgba(0,0,0,0.5)",
         } }>
-            <div className = "modal-dialog modal-dialog-centered">
-                <div className = "modal-content">
-                    <div className = "modal-header">
-                        <h4 className = "modal-title" id = "myCenterModalLabel">Center modal</h4>
-                        <button type = "button"
-                                className = "btn-close"
-                                onClick = { () => {
-                                    setShow( false )
-                                } }></button>
-                    </div>
-                    <div className = "modal-body">
-                        <h5>Overflowing text to show scroll behavior</h5>
-                        <p>Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis in,
-                           egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus
-                           vel
-                           augue laoreet rutrum faucibus dolor auctor.</p>
-                    </div>
-                </div>
-            </div>
+            {
+                modalBody
+            }
         </div>
     }
 }

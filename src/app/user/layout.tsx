@@ -11,6 +11,9 @@ import { HeaderLayout } from "@/application/layout/header/HeaderLayout";
 import { SideBarLayout } from "@/application/layout/sidebar/SideBarLayout";
 import { ModalData } from "@/application/component/modal/ModalContext";
 import { ToastData } from "@/application/component/alert/ToastData";
+import React from "react";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function RootLayout( {
@@ -30,12 +33,16 @@ export default function RootLayout( {
             <title>ASTRA HONDA</title>
         </Head>
         <body className = "hold-transition light-skin sidebar-mini theme-primary fixed">
-
-        <div className = "wrapper">
-            <HeaderLayout/>
-            <SideBarLayout/>
-            { children }
-        </div>
+        <ModalData>
+            <ToastData>
+                <div className = "wrapper">
+                    <ToastContainer/>
+                    <HeaderLayout/>
+                    <SideBarLayout/>
+                    { children }
+                </div>
+            </ToastData>
+        </ModalData>
 
 
         </body>
