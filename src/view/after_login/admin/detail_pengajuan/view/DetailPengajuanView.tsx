@@ -22,6 +22,13 @@ export const DetailPengajuanView = () => {
         patchPengajuan,
         pengajuanSelesai,
         tolakPengajuan,
+        register,
+        errors,
+        handleSubmit,
+        reset,
+        getValues,
+        setValue,
+        loadingTolak
     } = DetailPengajuanViewModel()
     return <section className = "invoice printableArea" style = { {} }>
         <div className = "row" style = { {} }>
@@ -51,7 +58,7 @@ export const DetailPengajuanView = () => {
             </div>
 
             <div className = "row mt-4">
-                <div className = "col-sm-4 text-fade">
+                <div className = "col-sm-3 text-fade">
                     <h6 className = "text-dark">Nama Pemohon</h6>
                     <div>
                         { detailPengajuan?.data.user.nama }<br/>
@@ -60,7 +67,7 @@ export const DetailPengajuanView = () => {
                     </div>
                 </div>
 
-                <div className = "col-sm-4 text-fade">
+                <div className = "col-sm-3 text-fade">
                     <h6 className = "text-dark">Vendor</h6>
                     <div>
                         { detailPengajuan?.data.vendor?.nama_vendor ?? '-' }<br/>
@@ -70,7 +77,7 @@ export const DetailPengajuanView = () => {
                     </div>
                 </div>
 
-                <div className = "col-sm-4 text-fade">
+                <div className = "col-sm-3 text-fade">
                     <h6 className = "text-dark">Komentar Atasan</h6>
                     <div>
                         { detailPengajuan?.data.komentar ?? '-' }<br/>
@@ -79,6 +86,15 @@ export const DetailPengajuanView = () => {
                         {/*<abbr title = "Phone">P:</abbr> (123) 456-7890*/ }
                     </div>
                 </div>
+                { detailPengajuan?.data.komentar_ditolak !== null ? <div className = "col-sm-3 text-fade">
+                    <h6 className = "text-dark">Alasan Tolak</h6>
+                    <div>
+                        { detailPengajuan?.data.komentar_ditolak ?? '-' }<br/>
+                        {/*{ FormatCurrency.numberToReal( detailPengajuan?.data.harga ?? 0 ) }<br/>*/ }
+                        {/*Miami, FL 94107<br/>*/ }
+                        {/*<abbr title = "Phone">P:</abbr> (123) 456-7890*/ }
+                    </div>
+                </div> : null }
 
             </div>
 
@@ -335,41 +351,50 @@ export const DetailPengajuanView = () => {
 
     function modalTolak() {
         return <div className = "modal-dialog modal-dialog-centered">
-            <div className = "modal-content">
-                <div className = "modal-header">
-                    <h4 className = "modal-title" id = "myCenterModalLabel">Tolak Pengajaun</h4>
-                    <button type = "button"
-                            className = "btn-close"
-                            onClick = { () => {
-                                modal.hide();
-                            } }></button>
-                </div>
-                <div className = "modal-body">
-                    <h6>Yakin Tolak Pengajuan ?</h6>
-                </div>
-                <div className = { `modal-footer` }>
-                    <div className = { `d-flex justify-content-between` }>
-                        <div className = { `` }>
-                            <ButtonPrimary
-                                label = { 'Kembali' }
+                <div className = "modal-content">
+                    <div className = "modal-header">
+                        <h4 className = "modal-title" id = "myCenterModalLabel">Tolak Pengajaun</h4>
+                        <button type = "button"
+                                className = "btn-close"
                                 onClick = { () => {
                                     modal.hide();
-                                } }
-                                type = { "btn-primary" }/>
+                                } }></button>
+                    </div>
+                    <form onSubmit = { handleSubmit( tolakPengajuan ) }>
+                        <div className = "modal-body">
+                            <h6>Yakin Tolak Pengajuan ?</h6>
                         </div>
-                        <div className = { `` }>
-                            <ButtonPrimary
-                                type = { "btn-danger" }
-                                onClick = { () => {
-                                    tolakPengajuan().then( () => {
-                                        // // window.location.reload()
-                                    } );
-                                } }
-                                label = { 'Tolak Pengajuan' }/>
+                        <div style={{
+                            padding : '0 20px',
+                            marginBottom : '20px',
+                        }}>
+                            <InputTextArea label = { 'Alasan' }
+                                           id = { 'deskripsi' }
+                                           data = { register( 'reason' ) }
+                                           isError = { errors.reason !== undefined }
+                                           messageError = { errors.reason?.message }/>
+                        </div>
+
+                        <div className = { `modal-footer` }>
+                        <div className = { `col-12 d-flex justify-content-between` }>
+                                <ButtonPrimary
+                                    label = { 'Kembali' }
+                                    onClick = { () => {
+                                        modal.hide();
+                                    } }
+                                    type = { "btn-primary" }/>
+                            {/*<div className = { `` }>*/}
+                            {/*</div>*/}
+                                <ButtonPrimary
+                                    type = { "btn-danger" }
+                                    data = { 'submit' }
+                                    label = { loadingTolak ? 'Tunggu Sebentar' : 'Simpan' }/>
+                            {/*<div className = { `` }>*/}
+                            {/*</div>*/}
                         </div>
                     </div>
-                </div>
-            </div>
+                    </form>
+        </div>
         </div>
     }
 
