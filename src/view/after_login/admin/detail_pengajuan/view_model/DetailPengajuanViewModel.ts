@@ -11,6 +11,11 @@ import { RepositoryProsesAdmin } from "@/repository/admin/proses_admin/Repositor
 import { RepositoryTolakPengajuan } from "@/repository/admin/tolak_pengajuan/RepositoryTolakPengajuan";
 import { router } from "next/client";
 import { ModelSelesaiPengajaun } from "@/view/after_login/admin/detail_pengajuan/model/ModelSelesaiPengajaun";
+import * as Yup from "yup";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ModelTambahPengajuanUser } from "@/view/after_login/user/daftar_pengajuan/model/ModelTambahPengajuanUser";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { ModeTolakPengajuan } from "@/view/after_login/admin/detail_pengajuan/model/ModelTolakPengajuan";
 
 
 export const DetailPengajuanViewModel = () => {
@@ -91,12 +96,34 @@ export const DetailPengajuanViewModel = () => {
         }
     }
 
-    const tolakPengajuan = async () => {
-        const resp = await RepositoryTolakPengajuan( getId() );
+    const validationSchema = Yup.object().shape( {
+        reason : Yup.string().required( 'Alasan harus di isi' ),
+    } )
+
+    const {
+        register,
+        handleSubmit,
+        formState : { errors },
+        reset,
+        setValue,
+        getValues,
+    } = useForm<ModeTolakPengajuan>( {
+        defaultValues : {
+            reason : ""
+        },
+        resolver : yupResolver( validationSchema )
+    } );
+
+    const [ loadingTolak, setLoadingTolak ] = useState( false );
+
+    const tolakPengajuan: SubmitHandler<ModeTolakPengajuan> = async (data) => {
+        setLoadingTolak( true)
+        const resp = await RepositoryTolakPengajuan( getId(), data.reason );
         if ( resp !== null ) {
             modal.hide();
             getDetailData();
         }
+        setLoadingTolak( false )
     }
 
     useEffect( () => {
@@ -115,6 +142,13 @@ export const DetailPengajuanViewModel = () => {
         terimaPengajuan,
         setTerimaPengajuan,
         pengajuanSelesai,
-        tolakPengajuan
+        tolakPengajuan,
+        register,
+        handleSubmit,
+        errors,
+        reset,
+        setValue,
+        getValues,
+        loadingTolak
     }
 }

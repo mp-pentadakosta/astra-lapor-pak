@@ -21,6 +21,7 @@ export interface DataResponseDetailEntity {
     tanggal_selesai : null;
     deskripsi : string;
     komentar : string | null;
+    komentar_ditolak? : string | null;
     komentar_selesai : string | null;
     prioritas : string;
     status : string;

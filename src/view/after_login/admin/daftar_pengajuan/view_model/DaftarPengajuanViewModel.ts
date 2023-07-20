@@ -10,9 +10,7 @@ import { ModelSelectOption } from "@/application/component/input/model/ModelSele
 import StatusFormat from "@/utils/utils/status/StatusFormat";
 import { ModelDaftarPengajuanUser } from "@/view/after_login/user/daftar_pengajuan/model/ModelDaftarPengajuanUser";
 import { ModelFilterDate } from "@/view/after_login/admin/daftar_pengajuan/model/ModelFilterDate";
-import { RepositoryHistory } from "@/repository/admin/history/RepositoryHistory";
 import { toast } from "react-toastify";
-import { DatumResponseHistoryEntity } from "@/repository/admin/history/entity/ResponseHistoryEntity";
 import FormatCurrency from "@/utils/utils/Currency/FormatCurrency";
 import xlsx from "json-as-xlsx";
 
