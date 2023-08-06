@@ -7,7 +7,8 @@ export const RepositoryProsesAdmin = async ( id : number, data : ModelSelesaiPen
         "tipe" : "Selesai",
         "file_bph" : data.bph,
         "komentar_selesai" : data.keterangan,
-        "harga" : data.harga
+        "harga" : data.harga,
+        "foto" : data.foto,
     } );
     if ( resp !== null ) {
         return resp;

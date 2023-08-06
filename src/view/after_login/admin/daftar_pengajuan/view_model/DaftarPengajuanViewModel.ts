@@ -50,8 +50,12 @@ export const DaftarPengajuanViewModel = () => {
     const [ page, setPage ] = useState( 1 );
     const getListPengajuan = async ( page : number, limit : number ) => {
         setLoading( true );
-        const startDate = date?.startDate ?? Date.now().toString();
-        const endDate = date?.endDate ?? Date.now().toString();
+        const dayNow = new Date();
+        const startDate = date?.startDate.length === 0 ? `${dayNow.getFullYear()}-${dayNow.getMonth() + 1}-${dayNow.getDate()-7}` : date?.startDate;
+        const endDate = date?.endDate.length === 0 ? `${dayNow.getFullYear()}-${dayNow.getMonth() + 1}-${dayNow.getDate()}` : date?.endDate;
+        console.log( 'dayNow', dayNow )
+        console.log( 'startDate', dayNow.getFullYear() )
+        console.log( 'endDate', endDate )
         const response = await DaftarPengajuanRepository( page, limit, startDate,endDate )
         if ( response !== null ) {
             const dataList : ModelDaftarPengajuanUser[] = response.data.map( ( item : DatumResponsePengajuanEntity ) => {
@@ -96,7 +100,7 @@ export const DaftarPengajuanViewModel = () => {
                     status : StatusFormat.getStatus( item.status ?? '' ),
                 }
             } );
-            setListPengajuan( ( prevState ) => [
+            setListPengajuan( ( ) => [
                 ...dataList
             ] );
             setDate(()=>{

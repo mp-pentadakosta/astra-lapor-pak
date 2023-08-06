@@ -12,6 +12,7 @@ import { ModelTerimaPengajuan } from "@/view/after_login/admin/detail_pengajuan/
 import StatusFormat from "@/utils/utils/status/StatusFormat";
 import { InputTextArea } from "@/application/component/input/InputTextArea";
 import { ModelSelesaiPengajaun } from "@/view/after_login/admin/detail_pengajuan/model/ModelSelesaiPengajaun";
+import { InputFilePrimary } from "@/application/component/input/InputFilePrimary";
 
 
 export const DetailPengajuanView = () => {
@@ -25,9 +26,6 @@ export const DetailPengajuanView = () => {
         register,
         errors,
         handleSubmit,
-        reset,
-        getValues,
-        setValue,
         loadingTolak
     } = DetailPengajuanViewModel()
     return <section className = "invoice printableArea" style = { {} }>
@@ -403,6 +401,7 @@ export const DetailPengajuanView = () => {
             harga : 0,
             bph : '',
             keterangan : '',
+            foto : [],
         };
         return <div className = "modal-dialog modal-dialog-centered">
             <div className = "modal-content">
@@ -431,6 +430,33 @@ export const DetailPengajuanView = () => {
                                               harga : parseInt( event.target.value ),
                                           }
                                       } }/>
+                    <InputFilePrimary label = { 'Masukan Foto' }
+                                      id = { 'foto' }
+                                      // data = { register( 'foto' ) }
+                                      // messageError = { errors.foto?.message }
+                                      // isError = { errors.foto !== undefined }
+                                      isMultiple = { true }
+                                      onInput = { ( event ) => {
+                                          const files = event.currentTarget.files;
+                                          if ( files ) {
+                                              for ( let i = 0; i < files.length; i++ ) {
+                                                  const file = files[ i ];
+                                                  const reader = new FileReader();
+                                                  reader.onload = ( eventData ) => {
+                                                        dataSend = {
+                                                            ...dataSend,
+                                                            foto : [ ...dataSend.foto, {
+                                                                image : eventData.target?.result as string,
+                                                            }] as string[],
+                                                        }
+                                                      // setValue( 'foto', [ ...getValues( "foto" ), {
+                                                      //     image : eventData.target?.result as string,
+                                                      // } ] );
+                                                  };
+                                                  reader.readAsDataURL( file );
+                                              }
+                                          }
+                                      } }/>
                     <InputTextArea label = { 'Keterangan' }
                                    onChange = { ( event ) => {
                                        dataSend = {
@@ -454,6 +480,7 @@ export const DetailPengajuanView = () => {
                                 label = { 'Ya' }
                                 onClick = { () => {
                                     // console.log(dataSend)
+
                                     pengajuanSelesai( dataSend ).then( () => {
                                         // window.location.reload()
                                     } )

@@ -2,6 +2,7 @@ import { EnumMethod } from "@/core/enum/enum_method/EnumMethod";
 import { HeaderData } from "@/core/api/HeaderData";
 import axios, { AxiosError } from "axios";
 import HandlerResponse from "@/core/api/HandlerResponse";
+import { EnumEnv } from "@/core/api/EnumEnv";
 
 
 axios.interceptors.request.use( request => {
@@ -16,18 +17,24 @@ axios.interceptors.request.use( request => {
 
 axios.interceptors.response.use(
     response => {
-        console.debug( 'RESPONSE : ' );
-        console.debug( 'Response Status : ', response.status );
-        console.debug( 'PATH : ', response.request.responseURL );
-        console.debug( 'Response Headers : ', response.headers );
-        console.debug( 'Response Body : ', response.data );
+        if ( process.env.ENV === EnumEnv.development ){
+            console.debug( 'RESPONSE : ' );
+            console.debug( 'Response Status : ', response.status );
+            console.debug( 'PATH : ', response.request.responseURL );
+            console.debug( 'Response Headers : ', response.headers );
+            console.debug( 'Response Body : ', response.data );
+            return response;
+        }
         return response;
     },
     error => {
-        console.debug( 'RESPONSE : ' );
-        console.debug( 'Response Status : ', error.response?.status );
-        console.debug( 'Response Headers : ', error.response?.headers );
-        console.debug( 'Response Body : ', error.response?.data );
+        if ( process.env.ENV === EnumEnv.development ){
+            console.debug( 'RESPONSE : ' );
+            console.debug( 'Response Status : ', error.response?.status );
+            console.debug( 'Response Headers : ', error.response?.headers );
+            console.debug( 'Response Body : ', error.response?.data );
+            return Promise.reject( error );
+        }
         return Promise.reject( error );
     },
 );
@@ -62,6 +69,7 @@ class Api {
             return null;
         } catch ( e ) {
             const error = e as AxiosError;
+            console.debug( "ERROR : ", error )
             if ( error.message === 'Timeout' ) {
                 HandlerResponse.timeout( "Time Out, Periksa Koneksi Internet" )
                 return null;
@@ -74,17 +82,17 @@ class Api {
 
             if ( error.response?.status === 400 ) {
                 // @ts-ignore
-                HandlerResponse.badRequest( error.response.data?.message )
+                HandlerResponse.badRequest( error.response.data?.message ?? "Bad Request" )
                 return null;
             }
             else if ( error.response?.status === 401 ) {
                 // @ts-ignore
-                HandlerResponse.unauthorized( error.response.data?.message )
+                HandlerResponse.unauthorized( error.response.data?.message ?? "Unauthorized" )
                 return null;
             }
             else if ( error.response?.status === 403 ) {
                 // @ts-ignore
-                HandlerResponse.forbidden( error.response.data?.message )
+                HandlerResponse.forbidden( error.response.data?.message ?? "Forbidden" )
                 return null;
             }
             else if ( error.response?.status === 404 ) {

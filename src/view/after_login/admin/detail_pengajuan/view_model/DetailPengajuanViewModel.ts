@@ -9,11 +9,9 @@ import { ModelTerimaPengajuan } from "@/view/after_login/admin/detail_pengajuan/
 import { RepositoryTerimaPengajuan } from "@/repository/admin/terima_pengajuan/RepositoryTerimaPengajuan";
 import { RepositoryProsesAdmin } from "@/repository/admin/proses_admin/RepositoryProsesAdmin";
 import { RepositoryTolakPengajuan } from "@/repository/admin/tolak_pengajuan/RepositoryTolakPengajuan";
-import { router } from "next/client";
 import { ModelSelesaiPengajaun } from "@/view/after_login/admin/detail_pengajuan/model/ModelSelesaiPengajaun";
 import * as Yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { ModelTambahPengajuanUser } from "@/view/after_login/user/daftar_pengajuan/model/ModelTambahPengajuanUser";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ModeTolakPengajuan } from "@/view/after_login/admin/detail_pengajuan/model/ModelTolakPengajuan";
 
@@ -72,7 +70,6 @@ export const DetailPengajuanViewModel = () => {
                     total : 0,
                     poor : 0,
                     veryGood : 0,
-                    veryPoor : 0
                 }
             }
             setVendor( () => [ dataAdd, ...dataVendor ] );
@@ -109,7 +106,7 @@ export const DetailPengajuanViewModel = () => {
         getValues,
     } = useForm<ModeTolakPengajuan>( {
         defaultValues : {
-            reason : ""
+            reason : "",
         },
         resolver : yupResolver( validationSchema )
     } );
