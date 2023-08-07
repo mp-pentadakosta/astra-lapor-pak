@@ -32,7 +32,8 @@ export const DetailPengajuanUserViewModel = () => {
     }
 
     const giveRating = async () => {
-         await RatingRepository.giveRating( rating );
+        const id = getId();
+         await RatingRepository.giveRating( id,rating );
     }
 
     useEffect( () => {

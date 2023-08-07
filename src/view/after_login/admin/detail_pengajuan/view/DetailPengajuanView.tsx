@@ -175,7 +175,7 @@ export const DetailPengajuanView = () => {
                         {
                             detailPengajuan?.data.foto.map( ( item, index ) => {
                                 return <div key = { index }
-                                            className = { `col-12 col-md-6` }
+                                            className = { `flex-column col-12 col-md-6 p-5` }
                                             style = { {
                                                 boxShadow : '0 0 10px 0 rgba(0,0,0,0.3)',
                                                 borderRadius : '10px',
@@ -193,6 +193,16 @@ export const DetailPengajuanView = () => {
                                          } }
                                          src = { item.file_photo }
                                          alt = { 'img' }/>
+
+                                    <div className={``} style={{
+                                        // zIndex : 1,
+                                        backgroundColor : 'white',
+                                        // width : '100%',
+                                        textAlign : 'center',
+                                    }}>
+                                        <h5 className = { `text-center` } style={{
+                                        }}>{ item.is_in === 'in' ? 'Sebelum' : 'Sesudah' }</h5>
+                                    </div>
                                 </div>
                             } )
                         }
