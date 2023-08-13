@@ -11,7 +11,6 @@ export interface ModelVendor {
 export type ModelOrderVendor = {
     total : number;
     poor : number;
-    veryPoor : number;
     good : number;
     veryGood : number;
 }

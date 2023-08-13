@@ -3,11 +3,9 @@ import { usePathname } from "next/navigation";
 import { ResponseDetailEntity } from "@/repository/admin/detail_pengajuan_repository/entity/ResponseDetailEntity";
 import { ModalContext } from "@/application/component/modal/ModalContext";
 import {
-    DetailPengajuanAtasanRepository
-} from "@/repository/atasan/detail_pengajuan_repository/DetailPengajuanAtasanRepository";
-import {
     DetailPengajuanUserRepository
 } from "@/repository/user/detail_pengajuan_repository/DetailPengajuanUserRepository";
+import RatingRepository from "@/repository/rating/RatingRepository";
 
 
 export const DetailPengajuanUserViewModel = () => {
@@ -16,6 +14,7 @@ export const DetailPengajuanUserViewModel = () => {
 
     const [ detailPengajuan, setDetailPengajuan ] = useState<ResponseDetailEntity>();
 
+    const [ rating, setRating ] = useState( 0 );
 
     const getId = () => {
         const splitPath = pathname.split( '/' );
@@ -32,6 +31,11 @@ export const DetailPengajuanUserViewModel = () => {
         }
     }
 
+    const giveRating = async () => {
+        const id = getId();
+         await RatingRepository.giveRating( id,rating );
+    }
+
     useEffect( () => {
         getDetailData();
         return () => {
@@ -42,5 +46,8 @@ export const DetailPengajuanUserViewModel = () => {
     return {
         detailPengajuan,
         modal,
+        rating,
+        setRating,
+        giveRating
     }
 }

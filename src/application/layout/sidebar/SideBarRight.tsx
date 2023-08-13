@@ -2,8 +2,7 @@
 import { FaSignOutAlt } from "react-icons/fa";
 import { ModelLayout } from "@/application/layout/model/ModelLayout";
 import { useRouter } from "next/navigation";
-import { deleteCookie, getCookie } from "cookies-next";
-import { useEffect, useState } from "react";
+import { deleteCookie } from "cookies-next";
 
 
 interface InterfaceSideBarRight {
@@ -59,20 +58,7 @@ export const SideBarRight = ( props : InterfaceSideBarRight ) => {
                          style = { {
                              cursor : 'pointer'
                          } }>
-                        <div className = "d-flex align-items-center mb-30">
-                            <div className = "me-15 bg-primary-light h-50 w-50 l-h-60 rounded text-center">
-                                    <span className = "icon-Library fs-24">
-                                        <span className = "path1"></span>
-                                        <span className = "path2"></span>
-                                    </span>
-                            </div>
-                            <div className = "d-flex flex-column fw-500">
-                                <div className = "text-dark hover-primary mb-1 fs-16">
-                                    Profile
-                                </div>
-                                <span className = "text-fade">Account settings and more</span>
-                            </div>
-                        </div>
+
                         <div style = { { cursor : 'pointer' } }
                              onClick = { () => {
                                  props.onTapClose()

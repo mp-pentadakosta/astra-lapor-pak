@@ -1,11 +1,10 @@
-import { VendorRepository, VendorRepositoryByYear } from "@/repository/vendor/list_vendor/VendorRepository";
+import {  VendorRepositoryByYear } from "@/repository/vendor/list_vendor/VendorRepository";
 import { useContext, useEffect, useState } from "react";
 import { ModelVendor } from "@/view/after_login/admin/daftar_vendor/model/ModelVendor";
 import { ModalContext } from "@/application/component/modal/ModalContext";
 import { ModelAddVendor } from "@/view/after_login/admin/daftar_vendor/component/ModelAddVendor";
 import { EditVendorRepository } from "@/repository/vendor/edit_vendor/EditVendorRepository";
 import { DeletVendorRepository } from "@/repository/vendor/delete_vendor/DeletVendorRepository";
-import { DatumResponseHistoryEntity } from "@/repository/admin/history/entity/ResponseHistoryEntity";
 import xlsx from "json-as-xlsx";
 
 
@@ -47,7 +46,7 @@ export const DaftarVendorViewModel = () => {
 
 
     const editDataVendor = async ( id : number, data : ModelAddVendor ) => {
-        const resp = await EditVendorRepository( id, data );
+         await EditVendorRepository( id, data );
         modal.hide();
     }
 
@@ -132,7 +131,6 @@ export const DaftarVendorViewModel = () => {
                         "good" : item.order.good,
                         "very_good" : item.order.veryGood,
                         "poor" : item.order.poor,
-                        "very_poor" : item.order.veryPoor,
                         "total" : item.order.total,
                     }
                 } )

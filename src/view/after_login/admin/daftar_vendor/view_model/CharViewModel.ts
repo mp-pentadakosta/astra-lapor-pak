@@ -15,7 +15,7 @@ export const CharViewModel = () => {
     const [ good, setGood ] = useState<number[]>( [] );
     const [ veryGood, setVeryGood ] = useState<number[]>( [] );
     const [ poor, setPoor ] = useState<number[]>( [] );
-    const [ veryPoor, setVeryPoor ] = useState<number[]>( [] );
+    // const [ veryPoor, setVeryPoor ] = useState<number[]>( [] );
     const getListVendor = async ( data : string ) => {
         setLoading( true );
         const resp = await RepositoryVendorChartAll( data );
@@ -30,9 +30,9 @@ export const CharViewModel = () => {
             setPoor( resp.data.map( ( item ) => {
                 return item.sum_rating.countPoor;
             } ) );
-            setVeryPoor( resp.data.map( ( item ) => {
-                return item.sum_rating.countVeryPoor;
-            } ) );
+            // setVeryPoor( resp.data.map( ( item ) => {
+            //     return item.sum_rating.countVeryPoor;
+            // } ) );
         }
         setLoading( false );
     }
@@ -84,15 +84,15 @@ export const CharViewModel = () => {
                 borderColor : 'rgba(255,193,7,1)',
                 backgroundColor : 'rgba(255,193,7,0.5)',
             },
-            {
-                label : "Very Poor",
-                data : veryPoor,// [ 1, 2, 1 ],
-                //     vendor?.countMonth.map((item) => {
-                //     return item.count
-                // }),//
-                borderColor : 'rgba(244,67,54,1)',
-                backgroundColor : 'rgba(244,67,54,0.5)',
-            },
+            // {
+            //     label : "Very Poor",
+            //     data : veryPoor,// [ 1, 2, 1 ],
+            //     //     vendor?.countMonth.map((item) => {
+            //     //     return item.count
+            //     // }),//
+            //     borderColor : 'rgba(244,67,54,1)',
+            //     backgroundColor : 'rgba(244,67,54,0.5)',
+            // },
         ],
     };
 

@@ -99,6 +99,10 @@ export const HistoryAdminViewModel = () => {
                         value : "tgl_estimasi_pekerjaan",
                     },
                     {
+                        label : "tgl. Estimasi Selesai Pekerjaan",
+                        value : "tanggal_penyelesaian",
+                    },
+                    {
                         label : "tgl. Selesai Pekerjaan",
                         value : "tgl_selesai_pekerjaan",
                     },
@@ -122,6 +126,7 @@ export const HistoryAdminViewModel = () => {
                         "nama_vendor" : item.vendor === null ? '-' : item.vendor.nama_vendor,
                         "harga_perbaikan" : item.harga !== null ? FormatCurrency.numberToReal( item.harga ) : '-',
                         "tgl_estimasi_pekerjaan" : item.tanggal_mulai === null ? '-' : FormatDate.stringDateToStringLocale( item.tanggal_mulai ),
+                        "tanggal_penyelesaian" : item.tanggal_penyelesaian === null ? '-' : FormatDate.stringDateToStringLocale( item.tanggal_penyelesaian ),
                         "tgl_selesai_pekerjaan" : item.tanggal_selesai === null ? '-' : FormatDate.stringDateToStringLocale( item.tanggal_selesai ),
                         "status" : item.rating === null ? '-' : item.rating,
                         "status_pengajuan" : item.status,

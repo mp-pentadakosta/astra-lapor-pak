@@ -1,21 +1,22 @@
 "use client";
 import FormatDate from "@/utils/utils/format_date/FormatDate";
 import FormatCurrency from "@/utils/utils/Currency/FormatCurrency";
-import {ButtonPrimary} from "@/application/component/button/ButtonPrimary";
-import {
-    DetailPengajuanAtasanViewModel
-} from "@/view/after_login/atasan/detail_pengajuan/view_model/DetailPengajuanViewModel";
-import {InputTextArea} from "@/application/component/input/InputTextArea";
 import {
     DetailPengajuanUserViewModel
 } from "@/view/after_login/user/detail_pengajuan/view_model/DetailPengajuanViewModel";
+
+import { BsFillStarFill } from "react-icons/bs";
+import React from "react";
 
 
 export const DetailPengajuanUserView = () => {
     const {
         detailPengajuan,
-        modal,
+        rating,
+        setRating,
+        giveRating,
     } = DetailPengajuanUserViewModel()
+
     return <section className="invoice printableArea" style={{}}>
         <div className="row">
             <div className="col-sm-6">
@@ -108,7 +109,6 @@ export const DetailPengajuanUserView = () => {
                         justifyContent: 'center',
 
                     }}>
-
                         {
                             detailPengajuan?.data.foto.map((item, index) => {
                                 return <div key={index}
@@ -133,7 +133,29 @@ export const DetailPengajuanUserView = () => {
                                 </div>
                             })
                         }
+                    </div>
+                </div>
+                <div className={`col-12`}>
+                    <h6>Berikan Rating</h6>
+                    <div className={`float-center`}>
+                        {
+                            [1, 2, 3, 4, 5].map((item, index) => {
+                                return rating >= item ? <BsFillStarFill size={50} className={`m-2`} key={index} color={'gold'} onClick={()=>{
+                                    setRating(item -1)
+                                    }}/> :
+                                    <BsFillStarFill size={50} key={index} className={`m-2`} color={'grey'} onClick={()=>{
+                                        setRating(item)
+                                    }} />
 
+                            })
+                        }
+                    </div>
+                    <div className="mb-0 card-subtitle text-muted mt-20">
+                        <button type="button" className="btn btn-success-light" onClick={() => {
+                             giveRating().then(() => {})
+                        }}>
+                            Simpan
+                        </button>
                     </div>
                 </div>
             </div>

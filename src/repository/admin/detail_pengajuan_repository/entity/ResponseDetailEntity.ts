@@ -67,7 +67,9 @@ export interface FotoResponseDetailEntity {
     file_photo : string;
     createdAt : Date;
     updatedAt : Date;
+    is_in: string;
 }
+
 
 // Converts JSON strings to/from your types
 export class ConvertResponseDetailEntity {
