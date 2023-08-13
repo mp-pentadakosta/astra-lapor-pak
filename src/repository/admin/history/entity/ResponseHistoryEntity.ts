@@ -24,6 +24,7 @@ export interface DatumResponseHistoryEntity {
     departemen : string;
     tanggal_mulai : string | null;
     tanggal_selesai : string | null;
+    tanggal_penyelesaian : string | null;
     deskripsi : string;
     komentar : null | string;
     prioritas : EnumPrioritas;
