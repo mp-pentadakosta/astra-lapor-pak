@@ -36,6 +36,7 @@ export interface DatumResponseHistoryEntity {
     vendor : InterfaceVendorHistory | null;
     createdAt : Date;
     updatedAt : Date;
+    detail_rating : DetailRating | null;
 }
 
 interface UserHistory {
@@ -52,6 +53,10 @@ interface InterfaceVendorHistory {
     pemilik_vendor : string;
     telpon : string
     updatedAt : string;
+}
+
+interface DetailRating{
+    rating : number;
 }
 
 // Converts JSON strings to/from your types

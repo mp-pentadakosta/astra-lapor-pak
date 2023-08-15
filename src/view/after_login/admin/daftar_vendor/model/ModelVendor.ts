@@ -9,7 +9,7 @@ export interface ModelVendor {
 }
 
 export type ModelOrderVendor = {
-    total : number;
+    rate : number;
     poor : number;
     good : number;
     veryGood : number;
