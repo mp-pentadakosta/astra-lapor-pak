@@ -111,6 +111,10 @@ export const HistoryAdminViewModel = () => {
                         value : "status",
                     },
                     {
+                        label : "Rating User",
+                        value : "rating_user",
+                    },
+                    {
                         label : "Status",
                         value : "status_pengajuan",
                     },
@@ -126,9 +130,10 @@ export const HistoryAdminViewModel = () => {
                         "nama_vendor" : item.vendor === null ? '-' : item.vendor.nama_vendor,
                         "harga_perbaikan" : item.harga !== null ? FormatCurrency.numberToReal( item.harga ) : '-',
                         "tgl_estimasi_pekerjaan" : item.tanggal_mulai === null ? '-' : FormatDate.stringDateToStringLocale( item.tanggal_mulai ),
-                        "tanggal_penyelesaian" : item.tanggal_penyelesaian === null ? '-' : FormatDate.stringDateToStringLocale( item.tanggal_penyelesaian ),
-                        "tgl_selesai_pekerjaan" : item.tanggal_selesai === null ? '-' : FormatDate.stringDateToStringLocale( item.tanggal_selesai ),
+                        "tanggal_penyelesaian" :  item.tanggal_selesai === null ? '-' : FormatDate.stringDateToStringLocale( item.tanggal_selesai ) ,
+                        "tgl_selesai_pekerjaan" :item.tanggal_penyelesaian === null ? '-' : FormatDate.stringDateToStringLocale( item.tanggal_penyelesaian ),
                         "status" : item.rating === null ? '-' : item.rating,
+                        "rating_user" : item.detail_rating !== null ? (item.detail_rating?.rating === null ? '0' : item.detail_rating?.rating) : 0,
                         "status_pengajuan" : item.status,
                     }
                 } )

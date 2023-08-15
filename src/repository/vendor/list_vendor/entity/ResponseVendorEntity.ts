@@ -20,6 +20,7 @@ export interface DatumResponseVendorEntity {
     is_deleted : null;
     createdAt : string;
     updatedAt : string;
+    rate: string|null;
     countAll : number | null;
     countPoor : number | null;
     countVeryPoor : number | null;

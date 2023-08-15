@@ -56,7 +56,7 @@ export const TableVendor = ( props : InterfaceTableDaftarPengajaun ) => {
                     </th>
                     <th style = { {
                         width : "5%",
-                    } }>Total
+                    } }>Rating
                     </th>
                     <th style = { {
                         width : "15%",
@@ -77,7 +77,7 @@ export const TableVendor = ( props : InterfaceTableDaftarPengajaun ) => {
                             <td>{ item.order.good }</td>
                             <td>{ item.order.veryGood }</td>
                             <td>{ item.order.poor }</td>
-                            <td>{ item.order.total }</td>
+                            <td>{ item.order.rate }</td>
                             <td>
                                 <ButtonPrimary type = { 'btn-primary' } label = { "Lihat" } onClick = { () => {
                                     props.seeVendor( item )

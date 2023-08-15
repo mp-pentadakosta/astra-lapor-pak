@@ -22,7 +22,6 @@ export const DaftarVendorViewModel = () => {
         const resp = await VendorRepositoryByYear( year );
         if ( resp !== null ) {
             const dataVendor : ModelVendor[] = resp.data.map( ( item ) => {
-                console.log( `item ${ item.nama_vendor }`, item )
                 return {
                     id : item.id,
                     noVendor : item.no_vendor,
@@ -32,7 +31,7 @@ export const DaftarVendorViewModel = () => {
                     telpon : item.telpon,
                     order : {
                         good : item.countGood ?? 0,
-                        total : item.countAll ?? 0,
+                        rate : Number(item.rate ?? "0") ?? 0,
                         poor : item.countPoor ?? 0,
                         veryGood : item.countVeryGood ?? 0,
                         veryPoor : item.countVeryPoor ?? 0,
@@ -116,8 +115,8 @@ export const DaftarVendorViewModel = () => {
                         value : "very_poor",
                     },
                     {
-                        label : "total",
-                        value : "total",
+                        label : "Rating",
+                        value : "rating",
                     },
                 ],
                 content : vendor.map( ( item : ModelVendor, index : number ) => {
@@ -131,7 +130,7 @@ export const DaftarVendorViewModel = () => {
                         "good" : item.order.good,
                         "very_good" : item.order.veryGood,
                         "poor" : item.order.poor,
-                        "total" : item.order.total,
+                        "rating" : item.order.rate,
                     }
                 } )
             },

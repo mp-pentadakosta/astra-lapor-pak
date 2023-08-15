@@ -60,6 +60,11 @@ export const TableHistoryPengajuan = ( props : InterfaceTableHistoryPengajaun ) 
                     <th className = "d-none d-md-table-cell"
                         style = { {
                             width : "15%",
+                        } }>Rating User
+                    </th>
+                    <th className = "d-none d-md-table-cell"
+                        style = { {
+                            width : "15%",
                         } }>Status
                     </th>
                 </tr>
@@ -100,6 +105,13 @@ export const TableHistoryPengajuan = ( props : InterfaceTableHistoryPengajaun ) 
                                     display : "flex",
                                 } }>
                                     <RatingCardStyle data = { item.rating ?? EnumRating.undefined }/>
+                                </div>
+                            </td>
+                            <td>
+                                <div style = { {
+                                    display : "flex",
+                                } }>
+                                    { item.detail_rating !== null ? item.detail_rating.rating : 0 }
                                 </div>
                             </td>
                             <td className = "d-none d-md-table-cell text-fade">
