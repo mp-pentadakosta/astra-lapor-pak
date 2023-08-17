@@ -52,7 +52,7 @@ export const DetailPengajuanViewModel = () => {
                     order : {
                         total : 0,
                         poor : 0,
-                        veryPoor : 0,
+                        rate : 0,
                         veryGood : 0,
                         good : 0
                     }
@@ -67,7 +67,7 @@ export const DetailPengajuanViewModel = () => {
                 telpon : "",
                 order : {
                     good : 0,
-                    total : 0,
+                    rate : 0,
                     poor : 0,
                     veryGood : 0,
                 }
