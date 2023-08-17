@@ -38,6 +38,9 @@ next-env.d.ts
 .vscode
 .idea
 
+.env.production
+.env.development
+
 package-lock.json
 
 .env.development
