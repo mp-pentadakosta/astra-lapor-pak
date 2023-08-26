@@ -58,10 +58,10 @@ export const ChartVendorView = () => {
                             </div>
                         </div>
                         <div className = { `row` }>
-                            <div className = { `col-12 col-xl-12` }>
+                            <div className = { `col-12 col-xl-12 scrollable-content` }>
                                 { loading ? <div>
                                     loading...
-                                </div> : <Bar className = { `max-h-500` }
+                                </div> : <Bar className = { `max-h-300` }
                                               options = { options }
                                               data = { data }/> }
                             </div>

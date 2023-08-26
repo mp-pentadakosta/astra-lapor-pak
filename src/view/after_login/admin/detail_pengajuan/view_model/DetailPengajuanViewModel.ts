@@ -52,9 +52,9 @@ export const DetailPengajuanViewModel = () => {
                     order : {
                         total : 0,
                         poor : 0,
-                        rate : 0,
                         veryGood : 0,
-                        good : 0
+                        good : 0,
+                        rate : 0,
                     }
                 }
             } )

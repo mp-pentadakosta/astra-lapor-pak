@@ -33,6 +33,7 @@ export interface DataResponseDetailEntity {
     foto : FotoResponseDetailEntity[];
     aktivitas : AktivitaResponseDetailEntity[];
     user : UserResponseDetailEntity;
+    detail_rating: RatingResponseDetailEntity | null;
 }
 
 interface UserResponseDetailEntity {
@@ -68,6 +69,10 @@ export interface FotoResponseDetailEntity {
     createdAt : Date;
     updatedAt : Date;
     is_in: string;
+}
+
+interface RatingResponseDetailEntity {
+    rating : number;
 }
 
 

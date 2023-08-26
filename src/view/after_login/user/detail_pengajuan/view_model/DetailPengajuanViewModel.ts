@@ -19,7 +19,6 @@ export const DetailPengajuanUserViewModel = () => {
     const getId = () => {
         const splitPath = pathname.split( '/' );
         const id = splitPath[ splitPath.length - 1 ];
-        console.log( 'id', id )
         return parseInt( id );
     }
 
@@ -28,6 +27,7 @@ export const DetailPengajuanUserViewModel = () => {
         const resp = await DetailPengajuanUserRepository( id );
         if ( resp !== null ) {
             setDetailPengajuan( resp );
+            setRating( resp.data.detail_rating?.rating ?? 0)
         }
     }
 
