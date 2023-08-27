@@ -90,7 +90,7 @@ export const TableHistoryPengajuan = ( props : InterfaceTableHistoryPengajaun ) 
                                    } }>
                             <td>{ index + 1 }</td>
                             <td>{ item.pengajuan_name }</td>
-                            <td>{ item.user?.nama ?? '' }</td>
+                            <td>{ item.user !== undefined ?  (item.user?.nama ?? '') : '' }</td>
                             <td>{ item.departemen }</td>
                             <td>{ FormatDate.stringDateToStringLocale( item.tanggal_pengajuan ) }</td>
                             <td>
