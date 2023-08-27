@@ -90,7 +90,7 @@ export const TableHistoryPengajuan = ( props : InterfaceTableHistoryPengajaun ) 
                                    } }>
                             <td>{ index + 1 }</td>
                             <td>{ item.pengajuan_name }</td>
-                            <td>{ item.user.nama }</td>
+                            <td>{ item?.user.nama ?? '' }</td>
                             <td>{ item.departemen }</td>
                             <td>{ FormatDate.stringDateToStringLocale( item.tanggal_pengajuan ) }</td>
                             <td>
@@ -111,7 +111,7 @@ export const TableHistoryPengajuan = ( props : InterfaceTableHistoryPengajaun ) 
                                 <div style = { {
                                     display : "flex",
                                 } }>
-                                    { item.detail_rating !== null ? item.detail_rating.rating : 0 }
+                                    { (item.detail_rating !== null ? item.detail_rating.rating : 0) ?? '' }
                                 </div>
                             </td>
                             <td className = "d-none d-md-table-cell text-fade">

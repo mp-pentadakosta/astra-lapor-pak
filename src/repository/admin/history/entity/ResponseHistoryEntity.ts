@@ -32,7 +32,7 @@ export interface DatumResponseHistoryEntity {
     rating : EnumRating | null;
     harga : number | null;
     is_deleted : null;
-    user : UserHistory
+    user : UserHistory | null;
     vendor : InterfaceVendorHistory | null;
     createdAt : Date;
     updatedAt : Date;
