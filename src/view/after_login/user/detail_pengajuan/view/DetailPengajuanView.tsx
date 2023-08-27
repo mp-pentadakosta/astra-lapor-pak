@@ -15,6 +15,7 @@ export const DetailPengajuanUserView = () => {
         rating,
         setRating,
         giveRating,
+        status,
     } = DetailPengajuanUserViewModel()
 
     return <section className="invoice printableArea" style={{}}>
@@ -135,29 +136,44 @@ export const DetailPengajuanUserView = () => {
                         }
                     </div>
                 </div>
-                <div className={`col-12`}>
-                    <h6>Berikan Rating</h6>
-                    <div className={`float-center`}>
-                        {
-                            [1, 2, 3, 4, 5].map((item, index) => {
-                                return rating >= item ? <BsFillStarFill size={50} className={`m-2`} key={index} color={'gold'} onClick={()=>{
-                                    setRating(item -1)
-                                    }}/> :
-                                    <BsFillStarFill size={50} key={index} className={`m-2`} color={'grey'} onClick={()=>{
-                                        setRating(item)
-                                    }} />
+                {
+                    status ? <div className={`col-12`} style={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        marginTop: '20px',
+                    }}>
+                        <div>
+                            <h6 style={{
+                                textAlign: 'center',
+                            }}>Berikan Rating</h6>
+                            <div className={`float-center`}>
+                                {
+                                    [1, 2, 3, 4, 5].map((item, index) => {
+                                        return rating >= item ? <BsFillStarFill size={50} className={`m-2`} key={index} color={'gold'} onClick={()=>{
+                                                setRating(item -1)
+                                            }}/> :
+                                            <BsFillStarFill size={50} key={index} className={`m-2`} color={'grey'} onClick={()=>{
+                                                setRating(item)
+                                            }} />
 
-                            })
-                        }
-                    </div>
-                    <div className="mb-0 card-subtitle text-muted mt-20">
-                        <button type="button" className="btn btn-success-light" onClick={() => {
-                             giveRating().then(() => {})
-                        }}>
-                            Simpan
-                        </button>
-                    </div>
-                </div>
+                                    })
+                                }
+                            </div>
+                            <div className="mb-0 card-subtitle text-muted mt-20" style={{
+                                display: 'flex',
+                                flexDirection: 'row',
+                                justifyContent: 'center',
+                            }}>
+                                <button type="button" className="btn btn-success-light" onClick={() => {
+                                    giveRating().then(() => {})
+                                }}>
+                                    Simpan
+                                </button>
+                            </div>
+                        </div>
+                    </div> : <></>
+                }
             </div>
 
             <div className="row">

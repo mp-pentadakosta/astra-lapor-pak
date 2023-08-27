@@ -16,6 +16,8 @@ export const DetailPengajuanUserViewModel = () => {
 
     const [ rating, setRating ] = useState( 0 );
 
+    const [ status, setStatus ] = useState( false );
+
     const getId = () => {
         const splitPath = pathname.split( '/' );
         const id = splitPath[ splitPath.length - 1 ];
@@ -28,12 +30,15 @@ export const DetailPengajuanUserViewModel = () => {
         if ( resp !== null ) {
             setDetailPengajuan( resp );
             setRating( resp.data.detail_rating?.rating ?? 0)
+            if ( resp.data.status === 'Selesai' ){
+                setStatus( true );
+            }
         }
     }
 
     const giveRating = async () => {
         const id = getId();
-         await RatingRepository.giveRating( id,rating );
+        await RatingRepository.giveRating( id,rating );
     }
 
     useEffect( () => {
@@ -48,6 +53,7 @@ export const DetailPengajuanUserViewModel = () => {
         modal,
         rating,
         setRating,
-        giveRating
+        giveRating,
+        status,
     }
 }
