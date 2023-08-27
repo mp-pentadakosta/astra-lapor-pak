@@ -123,7 +123,7 @@ export const HistoryAdminViewModel = () => {
                     return {
                         "no" : index + 1,
                         "pengajuan_name" : item.pengajuan_name,
-                        "nama_pemohon" : item.user.nama,
+                        "nama_pemohon" :  item.user?.nama ?? '',
                         "departemen" : item.departemen,
                         "tgl_pengajuan" : FormatDate.stringDateToStringLocale( item.tanggal_pengajuan ),
                         "prioritas" : item.prioritas,
