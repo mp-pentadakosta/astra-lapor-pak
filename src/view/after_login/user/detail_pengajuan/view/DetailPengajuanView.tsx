@@ -35,6 +35,16 @@ export const DetailPengajuanUserView = () => {
                         &nbsp;&nbsp;&nbsp; {FormatDate.stringDateToStringLocale(detailPengajuan?.data.tanggal_pengajuan ?? '')}
                     </p>
                     <p className="text-fade">
+                        <span className="text-dark">Tanggal Estimasi Selesai:</span>
+                        &nbsp;&nbsp;&nbsp; {FormatDate.stringDateToStringLocale(detailPengajuan?.data.tanggal_selesai ?? '')}
+                    </p>
+                    {
+                        status ? <p className="text-fade">
+                            <span className="text-dark">Tanggal Selesai:</span>
+                            &nbsp;&nbsp;&nbsp; {FormatDate.stringDateToStringLocale(detailPengajuan?.data.tanggal_penyelesaian ?? '')}
+                        </p> : <></>
+                    }
+                    <p className="text-fade">
                         <span className="text-dark">Status Pengajuan:</span>
                         <span className="badge bg-success float-end">{detailPengajuan?.data.status}</span></p>
                     {/*<p className = "text-fade">*/}

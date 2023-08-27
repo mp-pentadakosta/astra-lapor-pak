@@ -26,7 +26,8 @@ export const DetailPengajuanView = () => {
         register,
         errors,
         handleSubmit,
-        loadingTolak
+        loadingTolak,
+        status
     } = DetailPengajuanViewModel()
     return <section className = "invoice printableArea" style = { {} }>
         <div className = "row" style = { {} }>
@@ -44,6 +45,16 @@ export const DetailPengajuanView = () => {
                         <span className = "text-dark">Tanggal Pengajuan:</span>
                         &nbsp;&nbsp;&nbsp; { FormatDate.stringDateToStringLocale( detailPengajuan?.data.tanggal_pengajuan ?? '' ) }
                     </p>
+                    <p className = "text-fade">
+                        <span className = "text-dark">Tanggal Estimasi Selesai:</span>
+                        &nbsp;&nbsp;&nbsp; { FormatDate.stringDateToStringLocale( detailPengajuan?.data.tanggal_selesai ?? '' ) ?? '' }
+                    </p>
+                    {
+                        status ? <p className="text-fade">
+                            <span className="text-dark">Tanggal Selesai:</span>
+                            &nbsp;&nbsp;&nbsp; {FormatDate.stringDateToStringLocale(detailPengajuan?.data.tanggal_penyelesaian ?? '')}
+                        </p> : <></>
+                    }
                     <p className = "text-fade">
                         <span className = "text-dark">Status Pengajuan:</span>
                         <span
@@ -483,7 +494,7 @@ export const DetailPengajuanView = () => {
                                 onClick = { () => {
                                     modal.hide();
                                 } }
-                                label = { 'Tidak' }/>
+                                label = { 'Kembali' }/>
                         </div>
                         <div className = { `` }>
                             <ButtonPrimary

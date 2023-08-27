@@ -21,6 +21,8 @@ export const DetailPengajuanViewModel = () => {
 
     const [ detailPengajuan, setDetailPengajuan ] = useState<ResponseDetailEntity>();
 
+    const [ status, setStatus ] = useState(false);
+
     const pathname = usePathname();
     const getId = () => {
         const splitPath = pathname.split( '/' );
@@ -33,6 +35,9 @@ export const DetailPengajuanViewModel = () => {
         const resp = await DetailPengajuanRepository( id );
         if ( resp !== null ) {
             setDetailPengajuan( resp );
+            if ( resp.data.status === 'Selesai' ){
+                setStatus( true );
+            }
         }
     }
 
@@ -146,6 +151,7 @@ export const DetailPengajuanViewModel = () => {
         reset,
         setValue,
         getValues,
-        loadingTolak
+        loadingTolak,
+        status,
     }
 }

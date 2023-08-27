@@ -1,10 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import {usePathname} from "next/navigation";
-import {DetailPengajuanRepository} from "@/repository/admin/detail_pengajuan_repository/DetailPengajuanRepository";
 import {ResponseDetailEntity} from "@/repository/admin/detail_pengajuan_repository/entity/ResponseDetailEntity";
 import {ModalContext} from "@/application/component/modal/ModalContext";
-import {VendorRepository} from "@/repository/vendor/list_vendor/VendorRepository";
-import {ModelVendor} from "@/view/after_login/admin/daftar_vendor/model/ModelVendor";
 import {
     DetailPengajuanAtasanRepository
 } from "@/repository/atasan/detail_pengajuan_repository/DetailPengajuanAtasanRepository";
@@ -16,6 +13,8 @@ export const DetailPengajuanAtasanViewModel = () => {
     const pathname = usePathname();
 
     const [detailPengajuan, setDetailPengajuan] = useState<ResponseDetailEntity>();
+
+    const [ status, setStatus ] = useState( false );
 
 
     const getId = () => {
@@ -30,6 +29,9 @@ export const DetailPengajuanAtasanViewModel = () => {
         const resp = await DetailPengajuanAtasanRepository(id);
         if (resp !== null) {
             setDetailPengajuan(resp);
+            if ( resp.data.status === 'Selesai' ){
+                setStatus( true );
+            }
         }
     }
 
@@ -52,6 +54,7 @@ export const DetailPengajuanAtasanViewModel = () => {
     return {
         detailPengajuan,
         modal,
-        postKomentar
+        postKomentar,
+        status,
     }
 }

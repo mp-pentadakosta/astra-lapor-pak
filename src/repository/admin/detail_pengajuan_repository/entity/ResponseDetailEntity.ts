@@ -17,8 +17,9 @@ export interface DataResponseDetailEntity {
     pengajuan_name : string;
     tanggal_pengajuan : string;
     departemen : string;
-    tanggal_mulai : null;
-    tanggal_selesai : null;
+    tanggal_mulai : string| null;
+    tanggal_selesai : string| null;
+    tanggal_penyelesaian : string| null;
     deskripsi : string;
     komentar : string | null;
     komentar_ditolak? : string | null;

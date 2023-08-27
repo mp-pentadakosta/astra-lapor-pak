@@ -6,13 +6,15 @@ import {
     DetailPengajuanAtasanViewModel
 } from "@/view/after_login/atasan/detail_pengajuan/view_model/DetailPengajuanViewModel";
 import {InputTextArea} from "@/application/component/input/InputTextArea";
+import React from "react";
 
 
 export const DetailPengajuanAtasanView = () => {
     const {
         detailPengajuan,
         modal,
-        postKomentar
+        postKomentar,
+        status
     } = DetailPengajuanAtasanViewModel()
     return <section className="invoice printableArea" style={{}}>
         <div className="row">
@@ -30,6 +32,16 @@ export const DetailPengajuanAtasanView = () => {
                         <span className="text-dark">Tanggal Pengajuan:</span>
                         &nbsp;&nbsp;&nbsp; {FormatDate.stringDateToStringLocale(detailPengajuan?.data.tanggal_pengajuan ?? '')}
                     </p>
+                    <p className="text-fade">
+                        <span className="text-dark">Tanggal Estimasi Selesai:</span>
+                        &nbsp;&nbsp;&nbsp; {FormatDate.stringDateToStringLocale(detailPengajuan?.data.tanggal_pengajuan ?? '')}
+                    </p>
+                    {
+                        status ? <p className="text-fade">
+                            <span className="text-dark">Tanggal Selesai:</span>
+                            &nbsp;&nbsp;&nbsp; {FormatDate.stringDateToStringLocale(detailPengajuan?.data.tanggal_penyelesaian ?? '')}
+                        </p> : <></>
+                    }
                     <p className="text-fade">
                         <span className="text-dark">Status Pengajuan:</span>
                         <span className="badge bg-success float-end">{detailPengajuan?.data.status}</span></p>
