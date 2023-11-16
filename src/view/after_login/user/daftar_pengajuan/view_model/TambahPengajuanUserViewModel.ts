@@ -40,18 +40,18 @@ export const TambahPengajuanUserViewModel = () => {
         pengajuan_name : Yup.string().required( 'Jenis Keluhan harus di isi' ),
         deskripsi : Yup.string().required( 'Deskripsi tidak boleh kosong' ),
         prioritas : Yup.string().required( 'Prioritas harus di isi' ),
-        foto : Yup.mixed<FileList>().test(
-            "required",
-            "Foto minimal 1",
-            ( value ) => {
-                if ( value !== undefined ) {
-                    return value.length > 0;
-                }
-                else {
-                    return false;
-                }
-            }
-        )
+        // foto : Yup.mixed<FileList>().test(
+        //     "required",
+        //     "Foto minimal 1",
+        //     ( value ) => {
+        //         if ( value !== undefined ) {
+        //             return value.length > 0;
+        //         }
+        //         else {
+        //             return false;
+        //         }
+        //     }
+        // )
     } )
 
     const {
