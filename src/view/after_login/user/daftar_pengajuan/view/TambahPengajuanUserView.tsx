@@ -8,6 +8,7 @@ import {
     TambahPengajuanUserViewModel
 } from "@/view/after_login/user/daftar_pengajuan/view_model/TambahPengajuanUserViewModel";
 import { ButtonPrimary } from "@/application/component/button/ButtonPrimary";
+import compress from "compress-base64";
 
 
 export const TambahPengajuanUserView = () => {
@@ -62,10 +63,22 @@ export const TambahPengajuanUserView = () => {
                                                       for ( let i = 0; i < files.length; i++ ) {
                                                           const file = files[ i ];
                                                           const reader = new FileReader();
+
                                                           reader.onload = ( eventData ) => {
-                                                              setValue( 'foto', [ ...getValues( "foto" ), {
-                                                                  image : eventData.target?.result as string,
-                                                              } ] );
+                                                              const base64 = eventData.target?.result as string;
+                                                              const type = base64.split( ';' )[ 0 ].split( ':' )[ 1 ];
+                                                              const file = base64.split( ';' )[ 1 ].split( ',' )[ 1 ];
+                                                              compress(base64, {
+                                                                  width: 400,
+                                                                  type: `${type}`, // default
+                                                                  max: 200, // max size
+                                                                  min: 20, // min size
+                                                                  quality: 0.8
+                                                              }).then((result) => {
+                                                                  setValue( 'foto', [ ...getValues( "foto" ), {
+                                                                      image : result as string,
+                                                                  } ] );
+                                                              });
                                                           };
                                                           reader.readAsDataURL( file );
                                                       }

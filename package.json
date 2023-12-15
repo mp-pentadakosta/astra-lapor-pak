@@ -18,6 +18,7 @@
     "babel-plugin-macros": "^3.1.0",
     "bufferutil": "^4.0.7",
     "chart.js": "^4.2.1",
+    "compress-base64": "^1.0.2",
     "cookies-next": "^2.1.1",
     "faker": "^6.6.6",
     "json-as-xlsx": "^2.5.3",

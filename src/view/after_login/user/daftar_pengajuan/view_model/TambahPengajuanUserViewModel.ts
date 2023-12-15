@@ -1,7 +1,10 @@
 import * as Yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ModelTambahPengajuanUser } from "@/view/after_login/user/daftar_pengajuan/model/ModelTambahPengajuanUser";
+import {
+    ModelFotoTambahVendor,
+    ModelTambahPengajuanUser
+} from "@/view/after_login/user/daftar_pengajuan/model/ModelTambahPengajuanUser";
 import { useRouter } from "next/navigation";
 import { ModelSelectOption } from "@/application/component/input/model/ModelSelectOption";
 import { RepositoryAddPengajuan } from "@/repository/user/add_pengajuan/RepositoryAddPengajuan";
@@ -68,6 +71,7 @@ export const TambahPengajuanUserViewModel = () => {
             prioritas : '',
             foto : [],
         },
+        // @ts-ignore
         resolver : yupResolver( validationSchema )
     } );
 
