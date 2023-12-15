@@ -67,7 +67,6 @@ export const TambahPengajuanUserView = () => {
                                                           reader.onload = ( eventData ) => {
                                                               const base64 = eventData.target?.result as string;
                                                               const type = base64.split( ';' )[ 0 ].split( ':' )[ 1 ];
-                                                              const file = base64.split( ';' )[ 1 ].split( ',' )[ 1 ];
                                                               compress(base64, {
                                                                   width: 400,
                                                                   type: `${type}`, // default

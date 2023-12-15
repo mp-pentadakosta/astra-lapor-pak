@@ -2,7 +2,6 @@ import * as Yup from "yup";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
-    ModelFotoTambahVendor,
     ModelTambahPengajuanUser
 } from "@/view/after_login/user/daftar_pengajuan/model/ModelTambahPengajuanUser";
 import { useRouter } from "next/navigation";
