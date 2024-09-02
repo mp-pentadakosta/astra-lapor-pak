@@ -41,6 +41,7 @@ export const EditVendorViewModel = () => {
             pemilik_vendor: '',
             telpon: '',
         },
+    // @ts-ignore
         resolver: yupResolver(validationSchema)
     });
 

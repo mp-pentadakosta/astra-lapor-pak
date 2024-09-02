@@ -29,6 +29,7 @@ export const TambahVendorViewModel = () => {
             pemilik_vendor: '',
             telpon: '',
         },
+    // @ts-ignore
         resolver: yupResolver(validationSchema)
     });
 
