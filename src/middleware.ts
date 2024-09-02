@@ -15,4 +15,5 @@ export const config = {
         '/user/:path*',
         '/atasan/:path*',
     ],
+
 }
